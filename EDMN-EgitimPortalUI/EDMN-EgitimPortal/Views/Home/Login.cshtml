@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+
+    Layout = "_Layout"; // Ana layout dosyanızın adı
+}
+
+<div class="row justify-content-center" style="margin-top: 100px; margin-bottom: 300px;">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Giriş Yap</h3>
+            </div>
+            <div class="card-body">
+                <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+
+                <div class="mb-3">
+                    <label for="usernameOrEmail">Kullanıcı Adı veya E-posta</label>
+                    <input type="text" class="form-control" id="usernameOrEmail" placeholder="Kullanıcı adınızı veya e-postanızı girin" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="password">Şifre</label>
+                    <input type="password" class="form-control" id="password" placeholder="Şifrenizi girin" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <input type="checkbox" class="form-check" id="rememberMe" style="transform: scale(1.2); margin-right: 10px;" />
+                    <label for="rememberMe" class="form-check-label" style="font-size: 1rem; margin: 0;">Beni Hatırla</label>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" id="loginButton" class="btn btn-primary custom-signup-btn">Oturum Aç</button>
+                <span class="span-flex">veya</span>
+                <a href="/Home/Register" class="btn btn-secondary custom-login-btn">Kayıt Ol</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            console.log("Login.cshtml: Document ready. Initializing Notyf and event listeners.");
+
+            // Notyf'ın tanımlı olduğundan emin olun, değilse burada başlatın.
+            if (typeof notyf === 'undefined') {
+                console.log("Login.cshtml: Notyf not defined, initializing it globally.");
+                window.notyf = new Notyf({
+                    duration: 3000,
+                    position: { x: 'right', y: 'top' }
+                });
+            } else {
+                console.log("Login.cshtml: Notyf is already defined.");
+            }
+
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl"; // Controller'dan gelen API Base URL
+            console.log("Login.cshtml: API Base URL:", apiBaseUrl);
+
+            function displayValidationErrors(errors) {
+                var summary = $('#validationSummary');
+                summary.empty().show();
+                if (Array.isArray(errors)) {
+                    $.each(errors, function (i, error) {
+                        summary.append('<p>' + error + '</p>');
+                    });
+                } else if (typeof errors === 'string') {
+                    summary.append('<p>' + errors + '</p>');
+                } else {
+                    summary.append('<p>Giriş sırasında hata(lar) oluştu. Lütfen kontrol edin.</p>');
+                }
+                summary.addClass('alert-danger');
+                console.error("Login.cshtml: Validation errors displayed:", errors);
+            }
+
+            function clearValidationErrors() {
+                $('#validationSummary').empty().hide().removeClass('alert-danger');
+                $('.form-control').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+                console.log("Login.cshtml: Validation errors cleared.");
+            }
+
+            function showFieldValidationError(fieldId, message) {
+                var input = $('#' + fieldId);
+                input.addClass('is-invalid');
+                input.next('.invalid-feedback').text(message).show();
+                console.warn(`Login.cshtml: Field validation error for '${fieldId}': ${message}`);
+            }
+
+            $('#loginButton').on('click', function (e) {
+                console.log("Login.cshtml: Login button clicked.");
+                e.preventDefault(); // Varsayılan form gönderimini engelle
+                clearValidationErrors(); // Önceki hataları temizle
+
+                var usernameOrEmail = $('#usernameOrEmail').val().trim();
+                var password = $('#password').val().trim();
+                // var rememberMe = $('#rememberMe').is(':checked'); // API tarafından kullanılmıyor ancak UI için tutulabilir
+
+                let isValid = true;
+                if (!usernameOrEmail) {
+                    showFieldValidationError('usernameOrEmail', 'Kullanıcı adı veya e-posta boş bırakılamaz.');
+                    isValid = false;
+                }
+                if (!password) {
+                    showFieldValidationError('password', 'Şifre boş bırakılamaz.');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    console.log("Login.cshtml: Form validation failed.");
+                    notyf.error("Lütfen tüm zorunlu alanları doldurun.");
+                    return;
+                }
+
+                var loginData = {
+                    usernameOrEmail: usernameOrEmail,
+                    password: password
+                };
+                console.log("Login.cshtml: Attempting to send login data:", loginData);
+
+                $.ajax({
+                    url: apiBaseUrl + '/user/login', // API'nizin login endpoint'i
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(loginData),
+                    success: function (response) {
+                        console.log("Login.cshtml: AJAX success response:", response);
+                        if (response.token) {
+                            localStorage.setItem("token", response.token);
+                            notyf.success("Başarıyla giriş yapıldı!");
+                            console.log("Login.cshtml: Token received, redirecting to /");
+                            window.location.href = "/"; // Anasayfaya veya panoya yönlendir
+                        } else {
+                            notyf.error("Giriş başarısız: " + (response.message || "Bilinmeyen bir hata oluştu."));
+                            console.warn("Login.cshtml: Login successful but no token in response.", response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Login.cshtml: AJAX error:", xhr, status, error);
+                        var errorMessage = "Giriş sırasında bir hata oluştu.";
+                        if (xhr.responseJSON) {
+                            if (xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            if (xhr.responseJSON.errors) {
+                                $.each(xhr.responseJSON.errors, function (field, messages) {
+                                    showFieldValidationError(field.toLowerCase(), messages.join(', '));
+                                });
+                                displayValidationErrors("Formda hata(lar) var. Lütfen kontrol edin.");
+                            }
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
+                        }
+                        notyf.error(errorMessage);
+                        console.error("Login.cshtml: Final error message:", errorMessage);
+                    }
+                });
+            });
+
+            $('#password').keypress(function (event) {
+                if (event.which === 13) {
+                    console.log("Login.cshtml: Enter key pressed in password field.");
+                    $('#loginButton').click();
+                }
+            });
+        });
+    </script>
+}

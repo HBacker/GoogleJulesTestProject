@@ -1,0 +1,235 @@
+﻿@{
+    ViewData["Title"] = "Yeni Kurs Oluştur";
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left: 270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Kurs Oluştur</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left: 270px">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Kurs Bilgileri</h3>
+                    </div>
+                    <form id="createCourseForm" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+
+                            <div class="form-group">
+                                <label for="title">Başlık</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Kurs başlığını girin" required />
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Açıklama</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Kurs açıklamasını girin" required></textarea>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="content">İçerik</label>
+                                <textarea class="form-control" id="content" name="content" rows="10" placeholder="Kurs içeriğini girin"></textarea>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="categoryIds">Kategoriler</label>
+                                <select class="form-control" id="categoryIds" name="categoryIds" multiple="multiple" required>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="photoFile">Kurs Fotoğrafı</label>
+                                <input type="file" class="form-control" id="photoFile" name="photoFile" accept="image/*" />
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Oluştur</button>
+                            <a href="/Admin/List" class="btn btn-secondary">Geri Dön</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Notyf global olarak _layoutAdminLTE.cshtml'de başlatıldığı için burada tekrar tanımlanmıyor.
+
+        $(document).ready(function () {
+            const apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                notyf.error("Giriş yapmanız gerekiyor.");
+                window.location.href = "/Home/Login";
+                return;
+            }
+
+            function clearValidationErrors() {
+                $('#validationSummary').empty().hide().removeClass('alert-danger');
+                $('.form-control').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+            }
+
+            function showFieldValidationError(fieldId, message) {
+                const input = $('#' + fieldId);
+                input.addClass('is-invalid');
+                input.next('.invalid-feedback').text(message).show();
+            }
+
+            function displayValidationErrors(errors) {
+                const summary = $('#validationSummary');
+                summary.empty().show().addClass('alert-danger');
+                if (Array.isArray(errors)) {
+                    errors.forEach(error => {
+                        summary.append('<p>' + error + '</p>');
+                    });
+                } else if (typeof errors === 'string') {
+                    summary.append('<p>' + errors + '</p>');
+                } else {
+                    summary.append('<p>Formda hata(lar) var. Lütfen kontrol edin.</p>');
+                }
+            }
+
+            function getCategories() {
+                $.ajax({
+                    url: apiBaseUrl + '/categories', // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                    type: 'GET',
+                    headers: { "Authorization": "Bearer " + token },
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log("Kategoriler API'den alındı:", data); // Debugging için eklendi
+                        const categorySelect = $("#categoryIds");
+                        categorySelect.empty();
+
+                        if (Array.isArray(data)) {
+                            $.each(data, function (i, item) {
+                                categorySelect.append($('<option>', {
+                                    value: item.id,
+                                    text: item.name
+                                }));
+                            });
+                        } else {
+                            console.warn("Kategori verisi dizi formatında değil:", data);
+                            notyf.error("Kategori verisi beklenenden farklı formatta.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Kategoriler yüklenirken hata oluştu:", xhr.responseText);
+                        notyf.error("Kategoriler yüklenirken bir sorun oluştu.");
+                    }
+                });
+            }
+
+            getCategories();
+
+            $('#createCourseForm').on('submit', function (e) {
+                e.preventDefault();
+                clearValidationErrors();
+
+                const title = $('#title').val().trim();
+                const description = $('#description').val().trim();
+                const content = $('#content').val().trim();
+                const categoryIds = $('#categoryIds').val(); // Multiple select, returns array of IDs
+                const photoFile = $('#photoFile')[0].files[0];
+
+                let isValid = true;
+                if (!title) { showFieldValidationError('title', 'Başlık zorunludur.'); isValid = false; }
+                if (!description) { showFieldValidationError('description', 'Açıklama zorunludur.'); isValid = false; }
+                if (!categoryIds || categoryIds.length === 0) { showFieldValidationError('categoryIds', 'En az bir kategori seçimi zorunludur.'); isValid = false; }
+
+                if (!isValid) {
+                    notyf.error("Lütfen tüm zorunlu alanları doldurun.");
+                    return;
+                }
+
+                if (photoFile) {
+                    const photoFormData = new FormData();
+                    photoFormData.append('photoFile', photoFile);
+
+                    $.ajax({
+                        url: '/Admin/UploadCoursePhoto', // C# metodu için belirtilen yol
+                        type: 'POST',
+                        data: photoFormData,
+                        processData: false,
+                        contentType: false,
+                        success: function (filename) {
+                            createCourse(filename);
+                        },
+                        error: function (xhr) {
+                            notyf.error("Fotoğraf yüklenirken hata oluştu.");
+                            console.error("Fotoğraf yükleme hatası:", xhr.responseText);
+                        }
+                    });
+                } else {
+                    createCourse(null); // No photo file, send null
+                }
+
+                function createCourse(photoFileName) {
+                    const formData = new FormData(); // Use FormData for the main course creation
+                    formData.append('title', title);
+                    formData.append('description', description);
+                    formData.append('content', content);
+
+                    if (photoFileName) {
+                        formData.append('photoUrl', photoFileName); // Send filename if uploaded
+                    } else {
+                        formData.append('photoUrl', ''); // Send empty string or null if no photo
+                    }
+
+                    // Append each selected category ID
+                    $.each(categoryIds, function (i, id) {
+                        formData.append('categoryIds', id);
+                    });
+
+                    $.ajax({
+                        url: apiBaseUrl + '/courses', // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                        type: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                        data: formData,
+                        processData: false, // Important for FormData
+                        contentType: false, // Important for FormData
+                        success: function (response) {
+                            notyf.success("Kurs başarıyla oluşturuldu!");
+                            window.location.href = '/Admin/List';
+                        },
+                        error: function (xhr, status, error) {
+                            var errorMessage = "Kurs oluşturulurken hata oluştu.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                                if (xhr.responseJSON.errors) {
+                                    for (const field in xhr.responseJSON.errors) {
+                                        showFieldValidationError(field.toLowerCase(), xhr.responseJSON.errors[field].join(', '));
+                                    }
+                                }
+                            } else if (xhr.responseText) {
+                                errorMessage = xhr.responseText;
+                            }
+                            notyf.error(errorMessage);
+                            console.error("Kurs oluşturma hatası:", xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

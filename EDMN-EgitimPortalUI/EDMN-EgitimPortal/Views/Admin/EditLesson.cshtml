@@ -1,0 +1,365 @@
+﻿@{
+    ViewData["Title"] = "Ders Düzenle";
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dersleri Düzenle (<span id="courseTitle">Yükleniyor...</span>)</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Ders Bilgileri</h3>
+                    </div>
+                    <form id="editLessonsForm">
+                        <input type="hidden" id="courseId" value="@ViewBag.CourseId" />
+                        <div class="card-body">
+                            <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+                            <div id="lessonFields">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i> Değişiklikleri Kaydet
+                            </button>
+                            <a href="/Admin/LessonList?courseId=@ViewBag.CourseId" class="btn btn-secondary">Geri Dön</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .lesson-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .lesson-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .lesson-number {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.1em;
+    }
+
+    .lesson-body {
+        padding: 20px;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+        var token = localStorage.getItem("token");
+        var courseId = "@ViewBag.CourseId";
+
+        if (!token) {
+            notyf.error("Giriş yapmanız gerekiyor.");
+            location.href = "/Home/Login";
+            return;
+        }
+
+        function displayValidationErrors(errors) {
+            var summary = $('#validationSummary');
+            summary.empty().show();
+            if (Array.isArray(errors)) {
+                $.each(errors, function (i, error) {
+                    summary.append('<p>' + error + '</p>');
+                });
+            } else if (typeof errors === 'string') {
+                summary.append('<p>' + errors + '</p>');
+            } else {
+                summary.append('<p>Formda hata(lar) var. Lütfen kontrol edin.</p>');
+            }
+            summary.addClass('alert-danger');
+        }
+
+        function clearValidationErrors() {
+            $('#validationSummary').empty().hide().removeClass('alert-danger');
+            $('.form-control').removeClass('is-invalid');
+            $('.invalid-feedback').text('');
+        }
+
+        function showFieldValidationError(element, message) {
+            $(element).addClass('is-invalid');
+            $(element).next('.invalid-feedback').text(message).show();
+        }
+
+        function fetchLessonsForEdit(courseId) {
+            $.ajax({
+                url: apiBaseUrl + '/lessons?courseId=' + courseId, // Assuming API supports filtering by courseId
+                type: 'GET',
+                headers: { "Authorization": "Bearer " + token },
+                success: function (data) {
+                    var lessonFieldsContainer = $('#lessonFields');
+                    lessonFieldsContainer.empty();
+
+                    if (data && data.length > 0) {
+                        $('#courseTitle').text(data[0].courseTitle || 'Kurs'); // Display course title
+                        $.each(data, function (index, lesson) {
+                            const lessonDiv = $(`
+                                        <div class="lesson-card" id="lesson-card-${lesson.id}">
+                                            <div class="lesson-header">
+                                                <span class="lesson-number">Ders ${lesson.orderNo}</span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm remove-lesson-btn" data-id="${lesson.id}">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="lesson-body">
+                                                <div class="row g-4">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Ders Adı</label>
+                                                            <input type="text"
+                                                                   class="form-control lesson-title"
+                                                                   placeholder="Ders adını girin"
+                                                                   value="${lesson.title || ''}"
+                                                                   required />
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Video Dosyası</label>
+                                                            <div class="input-group">
+                                                                <input type="file"
+                                                                       class="form-control lesson-video-file"
+                                                                       accept="video/*" />
+                                                            </div>
+                                                            <small class="text-muted">Mevcut video: ${lesson.videoUrl || 'Yok'}</small>
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label">Thumbnail Dosyası</label>
+                                                            <div class="input-group">
+                                                                <input type="file"
+                                                                       class="form-control lesson-thumbnail-file"
+                                                                       accept="image/*" />
+                                                            </div>
+                                                            <small class="text-muted">Mevcut thumbnail: ${lesson.thumbnailUrl || 'Yok'}</small>
+                                                            ${lesson.thumbnailUrl ? `<img src="/thumbnails/${lesson.thumbnailUrl}" alt="Thumbnail" style="max-width: 100px; height: auto; margin-top: 5px;" class="img-thumbnail" />` : ''}
+                                                            <div class="invalid-feedback"></div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" class="lesson-id" value="${lesson.id}" />
+                                                    <input type="hidden" class="lesson-order-no" value="${lesson.orderNo}" />
+                                                    <input type="hidden" class="lesson-course-id" value="${lesson.courseId}" />
+                                                    <input type="hidden" class="lesson-existing-video-url" value="${lesson.videoUrl || ''}" />
+                                                    <input type="hidden" class="lesson-existing-thumbnail-url" value="${lesson.thumbnailUrl || ''}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `);
+                            lessonFieldsContainer.append(lessonDiv);
+                        });
+
+                        // Attach event listeners for remove buttons
+                        $('.remove-lesson-btn').on('click', function () {
+                            const lessonIdToRemove = $(this).data('id');
+                            removeLessonFromEdit(lessonIdToRemove);
+                        });
+
+                    } else {
+                        notyf.info("Bu kursa ait ders bulunamadı.");
+                        $('#courseTitle').text('Kurs');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    notyf.error("Dersler yüklenirken bir sorun oluştu.");
+                    console.error("Ders yükleme hatası:", xhr.responseText);
+                    window.location.href = '/Admin/LessonList';
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            if (courseId) {
+                fetchLessonsForEdit(courseId);
+            } else {
+                notyf.error("Düzenlenecek kurs ID'si bulunamadı.");
+                window.location.href = '/Admin/LessonList';
+            }
+
+            $('#editLessonsForm').on('submit', function (e) {
+                e.preventDefault();
+                clearValidationErrors();
+
+                const lessonsToUpdate = [];
+                let allLessonsValid = true;
+
+                $('#lessonFields .lesson-card').each(function (index) {
+                    const lessonId = $(this).find('.lesson-id').val();
+                    const lessonTitleInput = $(this).find('.lesson-title');
+                    const videoFileInput = $(this).find('.lesson-video-file');
+                    const thumbnailFileInput = $(this).find('.lesson-thumbnail-file');
+                    const orderNo = $(this).find('.lesson-order-no').val();
+                    const existingVideoUrl = $(this).find('.lesson-existing-video-url').val();
+                    const existingThumbnailUrl = $(this).find('.lesson-existing-thumbnail-url').val();
+
+                    const lessonTitle = lessonTitleInput.val().trim();
+                    const videoFile = videoFileInput[0].files[0];
+                    const thumbnailFile = thumbnailFileInput[0].files[0];
+
+                    clearFieldValidationError(lessonTitleInput);
+                    clearFieldValidationError(videoFileInput);
+                    clearFieldValidationError(thumbnailFileInput);
+
+                    if (!lessonTitle) {
+                        showFieldValidationError(lessonTitleInput, 'Ders adı boş bırakılamaz.');
+                        allLessonsValid = false;
+                    }
+                    if (videoFile && videoFile.size > 2 * 1024 * 1024 * 1024) {
+                        showFieldValidationError(videoFileInput, 'Video dosyası çok büyük (max: 2GB).');
+                        allLessonsValid = false;
+                    }
+                    if (thumbnailFile && thumbnailFile.size > 5 * 1024 * 1024) {
+                        showFieldValidationError(thumbnailFileInput, 'Thumbnail dosyası çok büyük (max: 5MB).');
+                        allLessonsValid = false;
+                    }
+
+                    if (allLessonsValid) {
+                        lessonsToUpdate.push({
+                            id: parseInt(lessonId),
+                            title: lessonTitle,
+                            videoFile: videoFile,
+                            thumbnailFile: thumbnailFile,
+                            orderNo: parseInt(orderNo),
+                            courseId: parseInt(courseId),
+                            videoUrl: existingVideoUrl,
+                            thumbnailUrl: existingThumbnailUrl
+                        });
+                    }
+                });
+
+                if (!allLessonsValid) {
+                    notyf.error("Lütfen tüm ders formlarındaki hataları düzeltin.");
+                    return;
+                }
+
+                if (lessonsToUpdate.length === 0) {
+                    notyf.info('Güncellenecek ders bulunamadı.');
+                    return;
+                }
+
+                // Send each lesson as a separate PUT request
+                let requests = [];
+                $.each(lessonsToUpdate, function (i, lesson) {
+                    var formData = new FormData();
+                    formData.append('id', lesson.id);
+                    formData.append('courseId', lesson.courseId);
+                    formData.append('title', lesson.title);
+                    formData.append('orderNo', lesson.orderNo);
+
+                    if (lesson.videoFile) {
+                        formData.append('videoFile', lesson.videoFile);
+                    } else {
+                        // If no new file, send the existing URL to tell API to keep it
+                        formData.append('videoUrl', lesson.videoUrl);
+                    }
+
+                    if (lesson.thumbnailFile) {
+                        formData.append('thumbnailFile', lesson.thumbnailFile);
+                    } else {
+                        // If no new file, send the existing URL to tell API to keep it
+                        formData.append('thumbnailUrl', lesson.thumbnailUrl);
+                    }
+
+                    requests.push($.ajax({
+                        url: apiBaseUrl + '/lessons/' + lesson.id, // PUT //lessons/{id}
+                        type: 'PUT',
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false
+                    }));
+                });
+
+                $.when.apply($, requests)
+                    .done(function () {
+                        notyf.success("Dersler başarıyla güncellendi!");
+                        window.location.href = '/Admin/LessonList?courseId=' + courseId;
+                    })
+                    .fail(function (xhr, status, error) {
+                        var errorMessage = "Dersler güncellenirken bir hata oluştu.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
+                        }
+                        notyf.error(errorMessage);
+                        console.error("Ders güncelleme hatası:", xhr.responseText);
+                    });
+            });
+        });
+
+        // Function to remove a lesson from the DOM and optionally from API
+        window.removeLessonFromEdit = function (lessonId) {
+            Swal.fire({
+                title: 'Emin misiniz?',
+                text: "Bu dersi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, Sil!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: apiBaseUrl + '/lessons/' + lessonId,
+                        type: 'DELETE',
+                        headers: { "Authorization": "Bearer " + token },
+                        success: function (response) {
+                            notyf.success("Ders başarıyla silindi.");
+                            $(`#lesson-card-${lessonId}`).remove(); // Remove from DOM
+                            // No need to update order numbers for 'EditLesson' as lessons are fetched by ID and displayed
+                            // and order is determined by DB. If new lessons are added dynamically here, re-indexing would be needed.
+                            if ($('.lesson-card').length === 0) {
+                                notyf.info('Bu kursa ait tüm dersler silindi.');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            var errorMessage = "Ders silinirken bir hata oluştu.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            } else if (xhr.responseText) {
+                                errorMessage = xhr.responseText;
+                            }
+                            notyf.error(errorMessage);
+                            console.error("Ders silme hatası:", xhr.responseText);
+                        }
+                    });
+                }
+            });
+        };
+    </script>
+}

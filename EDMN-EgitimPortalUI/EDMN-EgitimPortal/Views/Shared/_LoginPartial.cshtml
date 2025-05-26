@@ -1,0 +1,19 @@
+﻿<ul class="navbar-nav ms-auto" id="authNavLinks" style="font-family: TRT;">
+    <!-- Giriş Yapan Kullanıcı Menüsü -->
+    <li class="nav-item dropdown" id="authenticatedNav" style="border: 1px solid #ccc; border-radius: 10px; display: none;">
+        <a class="btn custom-login-btn dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> <span id="userDisplayName"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+            <li id="adminDashboardLink" style="display: none;"><a class="dropdown-item" href="/Admin/List">Admin Dashboard</a></li>
+            <li id="educatorDashboardLink" style="display: none;"><a class="dropdown-item" href="/Educator/Dashboard">Öğretmen Dashboard</a></li>
+            <li><a class="dropdown-item" href="#" id="logoutLink">Çıkış Yap</a></li>
+        </ul>
+    </li>
+
+    <!-- Giriş Yapmamış Kullanıcı Menüsü -->
+    <li class="nav-item" id="unauthenticatedNav" style="display: none;">
+        <a class="custom-login-btn me-2" href="/Home/Login">Oturum Aç</a>
+        <a class="custom-signup-btn" href="/Home/Register">Kayıt Ol</a>
+    </li>
+</ul>

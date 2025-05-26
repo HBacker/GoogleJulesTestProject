@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EgitimPortalFinal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EgitimPortalFinal.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/navstyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://wp.itsmycloud.space/wp-content/uploads/tarzan-player_forest.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+    <link rel="stylesheet" href="//releases.flowplayer.org/7.2.7/skin/skin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="hbrNav" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid d-flex align-items-center">
+                <a class="navbar-brand me-4" href="/Course/Course">
+                    <img src="/adminLayoutPhotos/egitimPortali.png" style="height: 60px; width: 80px;" alt="Logo">
+                </a>
+                <div class="nav-explore">
+                    <a class="nav-explore-button">Keşfet</a>
+                    <ul class="nav-explore-menu" id="categoryExploreMenu">
+                        <li class="nav-explore-header">Kurslar</li>
+                        <li><a href="/" class="nav-explore-item">Anasayfa</a></li>
+                    </ul>
+                </div>
+                <form class="d-flex flex-grow-1 custom-searchbox" role="search" action="/Course/SearchResults" method="get">
+                    <div class="input-group w-100" style="border-radius: 50px; height: 50px;">
+                        <button class="btn search-btn" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="text" class="form-control search-input" name="query" placeholder="Keşfetmek için arayın, sınırlarınızı zorlayın!" onkeydown="if(event.key === 'Enter'){this.form.submit();}" />
+                    </div>
+                </form>
+                <partial name="_LoginPartial"></partial>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer style="background-color: black; color: white; padding: 20px 0;">
+        <div style="text-align: center;">
+            <p style="margin: 0;">
+                <i class="fas fa-copyright"></i> 2024 Educate Me Now. All Rights Reserved.
+            </p>
+            <p>
+                <a href="/Home/About" style="color: white; margin: 0 10px; text-decoration: none;">Hakkımda</a>|
+                <a href="https://github.com/HBackeR" target="_blank"> <i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com/in/barzan-aslan" target="_blank"> <i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://instagram.com/cdngokhan" target="_blank"> <i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com/inquisitor.gokhan" target="_blank"> <i class="fa-brands fa-facebook"></i></a>
+            </p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="//releases.flowplayer.org/7.2.7/flowplayer.min.js"></script>
+    <script>
+        if (typeof notyf === 'undefined') {
+            window.notyf = new Notyf({
+                duration: 3000,
+                position: { x: 'right', y: 'top' }
+            });
+        }
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token");
+
+            function updateAuthNav(isAuthenticated, username = '', roles = []) {
+                var authenticatedNav = $('#authenticatedNav');
+                var unauthenticatedNav = $('#unauthenticatedNav');
+                var userDisplayName = $('#userDisplayName');
+                var adminDashboardLink = $('#adminDashboardLink');
+                var educatorDashboardLink = $('#educatorDashboardLink');
+
+                console.log("updateAuthNav called. IsAuthenticated:", isAuthenticated, "Username:", username, "Roles:", roles);
+                console.log("Elements found: authenticatedNav:", authenticatedNav.length > 0, "unauthenticatedNav:", unauthenticatedNav.length > 0, "userDisplayName:", userDisplayName.length > 0, "adminDashboardLink:", adminDashboardLink.length > 0, "educatorDashboardLink:", educatorDashboardLink.length > 0);
+                console.log("Initial display states: authenticatedNav:", authenticatedNav.css('display'), "unauthenticatedNav:", unauthenticatedNav.css('display'));
+
+                if (isAuthenticated) {
+                    if (unauthenticatedNav.length > 0) {
+                        unauthenticatedNav.css('display', 'none');
+                        console.log("unauthenticatedNav hidden.");
+                    }
+                    if (authenticatedNav.length > 0) {
+                        authenticatedNav.css('display', 'block');
+                        console.log("authenticatedNav shown.");
+                    }
+
+                    if (userDisplayName.length > 0) {
+                        userDisplayName.text(username);
+                        console.log("User display name set to:", username);
+                    }
+
+                    var isAdmin = roles.includes("Admin");
+                    var isEducator = roles.includes("Educator");
+                    console.log("Role check: Is Admin?", isAdmin, "Is Educator?", isEducator);
+
+                    if (adminDashboardLink.length > 0) {
+                        if (isAdmin) {
+                            adminDashboardLink.css('display', 'list-item');
+                            console.log("Admin Dashboard link shown.");
+                        } else {
+                            adminDashboardLink.css('display', 'none');
+                            console.log("Admin Dashboard link hidden.");
+                        }
+                    } else {
+                        console.warn("#adminDashboardLink not found.");
+                    }
+
+                    if (educatorDashboardLink.length > 0) {
+                        if (isEducator) {
+                            educatorDashboardLink.css('display', 'list-item');
+                            console.log("Educator Dashboard link shown.");
+                        } else {
+                            educatorDashboardLink.css('display', 'none');
+                            console.log("Educator Dashboard link hidden.");
+                        }
+                    } else {
+                        console.warn("#educatorDashboardLink not found.");
+                    }
+                } else {
+                    if (authenticatedNav.length > 0) {
+                        authenticatedNav.css('display', 'none');
+                        console.log("authenticatedNav hidden.");
+                    }
+                    if (unauthenticatedNav.length > 0) {
+                        unauthenticatedNav.css('display', 'flex');
+                        console.log("unauthenticatedNav shown.");
+                    }
+                }
+                console.log("updateAuthNav completed. Final display states: authenticatedNav:", authenticatedNav.css('display'), "unauthenticatedNav:", unauthenticatedNav.css('display'));
+            }
+
+            function fetchCurrentUser() {
+                if (token) {
+                    $.ajax({
+                        url: apiBaseUrl + '/user/current-user',
+                        type: 'GET',
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                        success: function (response) {
+                            var username = response.username || response.email || 'Kullanıcı';
+                            var roles = [];
+                            if (response.userType) {
+                                roles.push(response.userType); // ["Admin"], ["Educator"], ["Student"]
+                            }
+                            updateAuthNav(true, username, roles);
+                        },
+                        error: function (xhr, status, error) {
+                            if (xhr.status === 401 || xhr.status === 403) {
+                                localStorage.removeItem("token");
+                                notyf.error("Oturumunuz sona erdi. Lütfen tekrar giriş yapın.");
+                            }
+                            updateAuthNav(false);
+                        }
+                    });
+                } else {
+                    updateAuthNav(false);
+                }
+            }
+
+
+            function fetchCategoriesForExploreMenu() {
+                $.ajax({
+                    url: apiBaseUrl + '/categories',
+                    type: 'GET',
+                    success: function (data) {
+                        var categoryExploreMenu = $('#categoryExploreMenu');
+                        categoryExploreMenu.find('li:not(.nav-explore-header):not(:has(a[href="/"]))').remove();
+                        $.each(data, function (i, category) {
+                            categoryExploreMenu.append(`
+                                        <li><a href="/Course/Category/${category.name}" class="nav-explore-item">${category.name}</a></li>
+                                    `);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        notyf.error("Kategoriler yüklenirken bir sorun oluştu.");
+                    }
+                });
+            }
+
+            $('#logoutLink').on('click', function (e) {
+                e.preventDefault();
+                localStorage.removeItem("token");
+                notyf.success("Başarıyla çıkış yapıldı.");
+                window.location.href = "/Home/Login";
+            });
+
+            fetchCurrentUser();
+            fetchCategoriesForExploreMenu();
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

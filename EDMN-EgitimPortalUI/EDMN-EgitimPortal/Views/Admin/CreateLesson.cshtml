@@ -1,0 +1,346 @@
+﻿@{
+    ViewData["Title"] = "Ders Oluştur";
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Ders Oluştur</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Ders Bilgileri</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="courseSelect">Kurs Seçiniz</label>
+                            <select id="courseSelect" class="form-control form-control-lg" required>
+                                <option value="">Lütfen bir kurs seçin</option>
+                            </select>
+                            <div class="invalid-feedback">Lütfen bir kurs seçin.</div>
+                        </div>
+
+                        <div id="lessonFormsContainer">
+                        </div>
+
+                        <button type="button" class="btn btn-dark mt-3" id="addLessonBtn">
+                            <i class="fas fa-plus me-2"></i> Ders Ekle
+                        </button>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary" id="saveAllLessonsBtn">
+                            <i class="fas fa-save me-2"></i> Tüm Dersleri Kaydet
+                        </button>
+                        <a href="/Admin/LessonList" class="btn btn-secondary">Geri Dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .lesson-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .lesson-header {
+        padding: 15px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .lesson-number {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.1em;
+    }
+
+    .lesson-body {
+        padding: 20px;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        let lessonCounter = 0; // Tracks total lessons added (even if removed)
+        let activeLessonIndexes = []; // Tracks currently displayed lesson form indexes
+        var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+        var token = localStorage.getItem("token");
+
+        if (!token) {
+            notyf.error("Giriş yapmanız gerekiyor.");
+            location.href = "/Home/Login";
+            return;
+        }
+
+        function displayFieldValidationError(element, message) {
+            $(element).addClass('is-invalid');
+            $(element).next('.invalid-feedback').text(message).show();
+        }
+
+        function clearFieldValidationError(element) {
+            $(element).removeClass('is-invalid');
+            $(element).next('.invalid-feedback').text('').hide();
+        }
+
+        function getCoursesForDropdown() {
+            $.ajax({
+                url: apiBaseUrl + '/courses',
+                type: 'GET',
+                headers: { "Authorization": "Bearer " + token },
+                success: function (data) {
+                    var courseSelect = $("#courseSelect");
+                    courseSelect.empty();
+                    courseSelect.append($('<option>', { value: '', text: 'Lütfen bir kurs seçin' }));
+                    $.each(data, function (i, item) {
+                        courseSelect.append($('<option>', {
+                            value: item.id,
+                            text: item.title
+                        }));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Kurslar yüklenirken hata oluştu:", xhr.responseText);
+                    notyf.error("Kurslar yüklenirken bir sorun oluştu.");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            getCoursesForDropdown();
+
+            $('#courseSelect').on('change', function () {
+                // Clear existing lesson forms when course changes
+                $('#lessonFormsContainer').empty();
+                activeLessonIndexes = [];
+                lessonCounter = 0;
+                clearFieldValidationError(this);
+            });
+
+            $('#addLessonBtn').on('click', function () {
+                const courseId = $('#courseSelect').val();
+                if (!courseId) {
+                    displayFieldValidationError($('#courseSelect'), 'Lütfen ders eklemeden önce bir kurs seçin.');
+                    notyf.error('Lütfen ders eklemeden önce bir kurs seçin!');
+                    return;
+                }
+                addNewLessonForm();
+            });
+
+            $('#saveAllLessonsBtn').on('click', function () {
+                saveAllLessons();
+            });
+        });
+
+        function addNewLessonForm() {
+            const currentLessonIndex = lessonCounter++; // Assign unique index and increment counter
+            activeLessonIndexes.push(currentLessonIndex); // Add to active indexes
+
+            const container = $('#lessonFormsContainer');
+            const lessonDiv = $(`
+                        <div class="lesson-card" id="lesson-card-${currentLessonIndex}">
+                            <div class="lesson-header">
+                                <span class="lesson-number">Ders ${activeLessonIndexes.indexOf(currentLessonIndex) + 1}</span>
+                                <button type="button" class="btn btn-outline-danger btn-sm remove-lesson-btn" data-index="${currentLessonIndex}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="lesson-body">
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Ders Adı</label>
+                                            <input type="text"
+                                                   class="form-control lesson-title"
+                                                   placeholder="Ders adını girin"
+                                                   data-lesson-index="${currentLessonIndex}"
+                                                   required />
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Video Dosyası</label>
+                                            <div class="input-group">
+                                                <input type="file"
+                                                       class="form-control lesson-video-file"
+                                                       accept="video/*"
+                                                       data-lesson-index="${currentLessonIndex}" />
+                                            </div>
+                                            <small class="text-muted">Desteklenen formatlar: MP4, WebM, OGG (Max 2GB)</small>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Thumbnail Dosyası</label>
+                                            <div class="input-group">
+                                                <input type="file"
+                                                       class="form-control lesson-thumbnail-file"
+                                                       accept="image/*"
+                                                       data-lesson-index="${currentLessonIndex}" />
+                                            </div>
+                                            <small class="text-muted">Desteklenen formatlar: JPG, PNG, WebP (Max 5MB)</small>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="lesson-order-no" value="${activeLessonIndexes.indexOf(currentLessonIndex) + 1}" data-lesson-index="${currentLessonIndex}" />
+                                </div>
+                            </div>
+                        </div>
+                    `);
+            container.append(lessonDiv);
+
+            // Attach event listener for the new remove button
+            lessonDiv.find('.remove-lesson-btn').on('click', function () {
+                const indexToRemove = $(this).data('index');
+                removeLessonForm(indexToRemove);
+            });
+
+            updateLessonOrderNumbers();
+        }
+
+        function removeLessonForm(indexToRemove) {
+            $(`#lesson-card-${indexToRemove}`).remove();
+            activeLessonIndexes = activeLessonIndexes.filter(idx => idx !== indexToRemove); // Remove from active list
+            updateLessonOrderNumbers(); // Re-index remaining forms
+            notyf.info(`Ders ${activeLessonIndexes.indexOf(indexToRemove) + 1} formdan kaldırıldı.`);
+        }
+
+        function updateLessonOrderNumbers() {
+            $('.lesson-card').each(function (i) {
+                const card = $(this);
+                const originalIndex = card.find('.remove-lesson-btn').data('index'); // Get the original unique index
+                card.find('.lesson-number').text(`Ders ${i + 1}`);
+                card.find('.lesson-order-no').val(i + 1); // Update hidden order number
+            });
+        }
+
+        function saveAllLessons() {
+            const courseId = $('#courseSelect').val();
+            if (!courseId) {
+                displayFieldValidationError($('#courseSelect'), 'Lütfen dersleri kaydetmeden önce bir kurs seçin.');
+                notyf.error('Lütfen dersleri kaydetmeden önce bir kurs seçin.');
+                return;
+            }
+
+            clearFieldValidationError($('#courseSelect')); // Clear course select validation
+
+            const lessonsToCreate = [];
+            let allLessonsValid = true;
+
+            $('#lessonFormsContainer .lesson-card').each(function (index) {
+                const lessonTitleInput = $(this).find('.lesson-title');
+                const videoFileInput = $(this).find('.lesson-video-file');
+                const thumbnailFileInput = $(this).find('.lesson-thumbnail-file');
+                const orderNoInput = $(this).find('.lesson-order-no');
+
+                const lessonTitle = lessonTitleInput.val().trim();
+                const videoFile = videoFileInput[0].files[0];
+                const thumbnailFile = thumbnailFileInput[0].files[0];
+                const orderNo = parseInt(orderNoInput.val());
+
+                clearFieldValidationError(lessonTitleInput);
+                clearFieldValidationError(videoFileInput);
+                clearFieldValidationError(thumbnailFileInput);
+
+                if (!lessonTitle) {
+                    displayFieldValidationError(lessonTitleInput, 'Ders adı boş bırakılamaz.');
+                    allLessonsValid = false;
+                }
+                if (videoFile && videoFile.size > 2 * 1024 * 1024 * 1024) { // 2GB limit
+                    displayFieldValidationError(videoFileInput, 'Video dosyası çok büyük (max: 2GB).');
+                    allLessonsValid = false;
+                }
+                if (thumbnailFile && thumbnailFile.size > 5 * 1024 * 1024) { // 5MB limit
+                    displayFieldValidationError(thumbnailFileInput, 'Thumbnail dosyası çok büyük (max: 5MB).');
+                    allLessonsValid = false;
+                }
+
+                if (allLessonsValid) { // Only push if this specific lesson is valid
+                    lessonsToCreate.push({
+                        title: lessonTitle,
+                        videoFile: videoFile,
+                        thumbnailFile: thumbnailFile,
+                        orderNo: orderNo,
+                        courseId: parseInt(courseId)
+                    });
+                }
+            });
+
+            if (!allLessonsValid) {
+                notyf.error("Lütfen tüm ders formlarındaki hataları düzeltin.");
+                return;
+            }
+
+            if (lessonsToCreate.length === 0) {
+                notyf.error('Lütfen en az bir ders ekleyin.');
+                return;
+            }
+
+            // Send each lesson as a separate AJAX request
+            let requests = [];
+            $.each(lessonsToCreate, function (i, lesson) {
+                var formData = new FormData();
+                formData.append('courseId', lesson.courseId);
+                formData.append('title', lesson.title);
+                formData.append('orderNo', lesson.orderNo);
+
+                if (lesson.videoFile) {
+                    formData.append('videoFile', lesson.videoFile); // Assuming API takes videoFile
+                }
+                if (lesson.thumbnailFile) {
+                    formData.append('thumbnailFile', lesson.thumbnailFile); // Assuming API takes thumbnailFile
+                }
+
+                requests.push($.ajax({
+                    url: apiBaseUrl + '/lessons', // Your API's POST //lessons endpoint
+                    type: 'POST',
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false
+                }));
+            });
+
+            // Use $.when.apply to wait for all AJAX requests to complete
+            $.when.apply($, requests)
+                .done(function () {
+                    notyf.success("Tüm dersler başarıyla eklendi!");
+                    window.location.href = '/Admin/LessonList?courseId=' + courseId;
+                })
+                .fail(function (xhr, status, error) {
+                    var errorMessage = "Dersler eklenirken bir hata oluştu.";
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        errorMessage = xhr.responseText;
+                    }
+                    notyf.error(errorMessage);
+                    console.error("Ders ekleme hatası:", xhr.responseText);
+                });
+        }
+    </script>
+}

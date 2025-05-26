@@ -1,0 +1,220 @@
+﻿@{
+    ViewData["Title"] = "Arama Sonuçları";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Your public site's main layout
+}
+
+<h1 style="margin-top: 50px; margin-bottom: 30px;">Arama Sonuçları</h1>
+
+<div class="details-card-container" style="margin-bottom: 250px;">
+    <div class="text-center p-5" id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Yükleniyor...</span>
+        </div>
+        <p class="mt-3">Arama sonuçları yükleniyor...</p>
+    </div>
+    <div class="alert alert-warning" role="alert" id="noResultsMessage" style="display:none;">
+        <p>Aradığınız kriterlere uygun sonuç bulunamadı. Bizim için fazla iyisin dostum :)</p>
+    </div>
+</div>
+
+<style>
+    /* These styles are copied from the course-category-listing immersive to maintain consistency */
+    .details-card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .details-course-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .details-course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+    .details-course-card-img {
+        width: 100%;
+        height: 180px; /* Fixed height for images */
+        overflow: hidden;
+        border-bottom: 1px solid #eee;
+    }
+
+        .details-course-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the area without distortion */
+        }
+
+    .details-course-card-body {
+        padding: 15px;
+        flex-grow: 1;
+    }
+
+    .details-course-card-title {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: block; /* Make the link take full width */
+        color: #333;
+        text-decoration: none;
+    }
+
+        .details-course-card-title:hover {
+            color: #007bff; /* Highlight on hover */
+        }
+
+    .details-course-card-description {
+        font-size: 0.95em;
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        /* Limit description to a few lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Show up to 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .details-course-card-divider {
+        border: 0;
+        height: 1px;
+        background-color: #eee;
+        margin: 0 15px;
+    }
+
+    .details-course-card-footer {
+        padding: 15px;
+        text-align: right;
+    }
+
+    .details-btn-incele {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+        .details-btn-incele:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token"); // Token might be needed for some public APIs if secured
+
+            // Notyf'ın _Layout.cshtml'de veya notification.js'de başlatıldığı varsayılır.
+            if (typeof notyf === 'undefined') {
+                var notyf = new Notyf({
+                    duration: 3000,
+                    position: { x: 'right', y: 'top' }
+                });
+            }
+
+            // Function to get query parameter from URL
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            const searchQuery = getQueryParam('query'); // Get the search query from the URL
+            if (searchQuery) {
+                $('h1').text(`"${searchQuery}" için Arama Sonuçları`); // Update title with search query
+            } else {
+                $('h1').text("Tüm Kurslar"); // Default title if no query
+            }
+
+            // Function to fetch and display courses based on search query
+            function fetchCoursesBySearch(query) {
+                const courseContainer = $('.details-card-container');
+                const loadingSpinner = $('#loadingSpinner');
+                const noResultsMessage = $('#noResultsMessage');
+
+                courseContainer.find('.details-course-card').remove(); // Clear previous courses
+                noResultsMessage.hide();
+                loadingSpinner.show();
+
+                $.ajax({
+                    url: apiBaseUrl + 'api/courses', // Fetch all courses
+                    type: 'GET',
+                    headers: {
+                        // "Authorization": "Bearer " + token // Uncomment if public courses also require authentication
+                    },
+                    success: function (data) {
+                        loadingSpinner.hide();
+                        let matchingCourses = [];
+
+                        if (data && data.length > 0) {
+                            if (query) {
+                                // Client-side filtering by title or description (case-insensitive)
+                                const lowerCaseQuery = query.toLowerCase();
+                                matchingCourses = data.filter(course =>
+                                    (course.title && course.title.toLowerCase().includes(lowerCaseQuery)) ||
+                                    (course.description && course.description.toLowerCase().includes(lowerCaseQuery))
+                                );
+                            } else {
+                                // If no query, show all courses
+                                matchingCourses = data;
+                            }
+                        }
+
+                        if (matchingCourses.length > 0) {
+                            $.each(matchingCourses, function (i, course) {
+                                var photoUrl = course.photoUrl && course.photoUrl !== '-' ? `/CoursePhotos/${course.photoUrl}` : '/CoursePhotos/thumbnails/defaultCourseCover.png'; // Default image
+
+                                var courseCard = `
+                                            <div class="details-course-card">
+                                                <div class="details-course-card-img">
+                                                    <img src="${photoUrl}" class="img-fluid" alt="${course.title}" />
+                                                </div>
+                                                <div class="details-course-card-body">
+                                                    <h4>
+                                                        <a href="/Course/Detail/${course.id}" class="details-course-card-title" style="text-decoration:none; color:black;">
+                                                            ${course.title}
+                                                        </a>
+                                                    </h4>
+                                                    <p class="details-course-card-description">${course.description || 'Açıklama yok'}</p>
+                                                </div>
+                                                <hr class="details-course-card-divider">
+                                                <div class="details-course-card-footer">
+                                                    <a href="/Course/Detail/${course.id}" class="details-btn-incele">İncele</a>
+                                                </div>
+                                            </div>
+                                        `;
+                                courseContainer.append(courseCard);
+                            });
+                        } else {
+                            noResultsMessage.show();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        loadingSpinner.hide();
+                        notyf.error("Kurslar yüklenirken bir sorun oluştu.");
+                        console.error("Kurs yükleme hatası:", xhr.responseText);
+                        noResultsMessage.show();
+                    }
+                });
+            }
+
+            // Initial call to fetch courses based on the search query
+            fetchCoursesBySearch(searchQuery);
+        });
+    </script>
+}

@@ -1,0 +1,49 @@
+﻿@* Bu kısmi görünüm, tek bir ders için form alanlarını sağlar.
+    Sunucu tarafı model bağlamaları veya tag helper'ları içermez.
+    Dinamik olarak eklenecek ve veri toplama işlemi üst (parent) JavaScript tarafından yönetilecektir.
+*@
+
+<div class="lesson-body">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="form-label">Ders Adı</label>
+                <input type="text"
+                       class="form-control lesson-title"
+                       placeholder="Ders adını girin"
+                       required />
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-label">Video Dosyası</label>
+                <div class="input-group">
+                    <input type="file"
+                           class="form-control lesson-video-file"
+                           accept="video/*" />
+                </div>
+                <small class="text-muted">Desteklenen formatlar: MP4, WebM, OGG (Max 2GB)</small>
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="form-label">Thumbnail Dosyası</label>
+                <div class="input-group">
+                    <input type="file"
+                           class="form-control lesson-thumbnail-file"
+                           accept="image/*" />
+                </div>
+                <small class="text-muted">Desteklenen formatlar: JPG, PNG, WebP (Max 5MB)</small>
+                <div class="invalid-feedback"></div>
+            </div>
+        </div>
+        <!-- Bu gizli alanlar, dersin benzersiz kimliğini, sıra numarasını ve kurs kimliğini tutmak için kullanılacak
+             ve parent JavaScript tarafından dinamik olarak ayarlanacaktır. -->
+        <input type="hidden" class="lesson-id" value="0" /> <input type="hidden" class="lesson-order-no" value="1" />
+        <input type="hidden" class="lesson-course-id" value="0" />
+        <input type="hidden" class="lesson-existing-video-url" value="" />
+        <input type="hidden" class="lesson-existing-thumbnail-url" value="" />
+    </div>
+</div>

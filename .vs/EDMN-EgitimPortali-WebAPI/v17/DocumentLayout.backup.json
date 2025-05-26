@@ -1,0 +1,1132 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "T:\\Projects\\GoogleJulesTestProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\createlesson.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\createlesson.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\course\\course.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\course\\course.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\roleadd.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\roleadd.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\manageuserroles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\manageuserroles.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\lessonlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\lessonlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\getuserlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\getuserlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\getrolelist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\getrolelist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\editlesson.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\admin\\editlesson.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_layoutadminlte.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_layoutadminlte.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\notification.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\notification.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\detailsmodule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\wwwroot\\js\\detailsmodule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\home\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\home\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\course\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\course\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\course\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\course\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_courselessonform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_courselessonform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_courselessonform.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\shared\\_courselessonform.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportalui\\edmn-egitimportal\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}|EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\EDMN-EgitimPortal.csproj|solutionrelative:edmn-egitimportalui\\edmn-egitimportal\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\edmn-egitimportali-webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\edmn-egitimportali-webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\controllers\\lessonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\controllers\\lessonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\repositories\\commentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\repositories\\commentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\jwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\jwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\sqlserverdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\sqlserverdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\repositories\\coursesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\repositories\\coursesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\repositories\\categoriesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\repositories\\categoriesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250427163346_createwatchedcontentstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250427163346_createwatchedcontentstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250424234302_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250424234302_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\dtos\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\dtos\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\dtos\\coursecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\dtos\\coursecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\mapping\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\dtos\\coursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\dtos\\coursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250427224556_updatecourseandcategoryrelation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250427224556_updatecourseandcategoryrelation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\sqlserverdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\sqlserverdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250425223650_addcommentstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250425223650_addcommentstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250426155956_addeducatoridtolesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250426155956_addeducatoridtolesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250427150600_removeiswatchedfromlessons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250427150600_removeiswatchedfromlessons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250425013347_addusertypecolumn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250425013347_addusertypecolumn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250425020435_addeducatoridtocourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250425020435_addeducatoridtocourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250425020452_addeducatoridtolessons.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250425020452_addeducatoridtolessons.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\edmn-egitimportali-webapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\edmn-egitimportali-webapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|t:\\projects\\googlejulestestproject\\edmn-egitimportali-webapi\\migrations\\20250427220025_addcategorytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9E07043-1369-497B-9406-078CC7516C90}|EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj|solutionrelative:edmn-egitimportali-webapi\\migrations\\20250427220025_addcategorytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Create.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Create.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Create.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Create.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAwwFIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:33:31.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LessonList.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\LessonList.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\LessonList.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\LessonList.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\LessonList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:38:54.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\AdminController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAswKoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T17:28:28.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\HomeController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T18:01:21.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateLesson.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\CreateLesson.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\CreateLesson.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\CreateLesson.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\CreateLesson.cshtml",
+              "ViewState": "AgIAADIBAAAAAAAAAAAwwFoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:37:07.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "List.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\List.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\List.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\List.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\List.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAwwEMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:49:07.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Edit.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Edit.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Edit.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Edit.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAwwHcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:49:44.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\CourseController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Controllers\\CourseController.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAswHsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T17:54:48.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Course.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Course.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Course.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Course.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Course.cshtml",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAAGgAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T19:09:20.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Delete.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Delete.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Delete.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Delete.cshtml",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:37:42.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAnwMgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:36:12.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RoleAdd.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\RoleAdd.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\RoleAdd.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\RoleAdd.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\RoleAdd.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:51:15.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ManageUserRoles.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\ManageUserRoles.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\ManageUserRoles.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\ManageUserRoles.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\ManageUserRoles.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:51:23.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Index.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Index.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:38:45.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GetUserList.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetUserList.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetUserList.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetUserList.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetUserList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:50:53.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GetRoleList.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetRoleList.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetRoleList.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetRoleList.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\GetRoleList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:51:02.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EditLesson.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\EditLesson.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\EditLesson.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\EditLesson.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Admin\\EditLesson.cshtml",
+              "ViewState": "AgIAABABAAAAAAAAAAAlwCYBAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:38:46.137Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "_LayoutAdminLTE.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LayoutAdminLTE.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LayoutAdminLTE.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LayoutAdminLTE.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LayoutAdminLTE.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:40:49.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Login.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAIwHgAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:52:13.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:35:15.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\appsettings.json",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\appsettings.json",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\appsettings.json",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-23T17:56:24.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:55:02.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CoursesController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CoursesController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Controllers\\CoursesController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CoursesController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Controllers\\CoursesController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:02:39.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "notification.js",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\notification.js",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\notification.js",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\notification.js",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\notification.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-23T19:59:46.962Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "site.js",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\site.js",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-23T19:59:47.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Index.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:53:51.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "DetailsModule.js",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\DetailsModule.js",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\DetailsModule.js",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\DetailsModule.js",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\wwwroot\\js\\DetailsModule.js",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwA8AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-23T19:59:38.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Controllers\\CategoriesController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T01:50:19.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Program.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Program.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Program.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Program.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAwJkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:22:48.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Register.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Register.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Register.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Home\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:52:23.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "_CourseLessonForm.cshtml.css",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml.css",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml.css",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml.css",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-23T19:02:41.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "_CourseLessonForm.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Shared\\_CourseLessonForm.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T19:02:42.267Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Search.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Search.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Search.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Search.cshtml",
+              "ViewState": "AgIAALoAAAAAAAAAAAAYwNwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T19:12:39.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Details.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Details.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Details.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\Course\\Details.cshtml",
+              "ViewState": "AgIAAKkBAAAAAAAAAAAgwMsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T19:11:28.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Models\\ErrorViewModel.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T18:31:55.467Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Program.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Program.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Program.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Program.cs",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Program.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAuwDIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T18:29:23.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\_ViewImports.cshtml",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "EDMN-EgitimPortalUI\\EDMN-EgitimPortal\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T18:29:11.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "SqlServerDbContext.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\SqlServerDbContext.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\SqlServerDbContext.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\SqlServerDbContext.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\SqlServerDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:22:34.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Repositories\\GenericRepository.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:20:12.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "CoursesRepository.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CoursesRepository.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Repositories\\CoursesRepository.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CoursesRepository.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Repositories\\CoursesRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:20:10.233Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "CommentsRepository.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CommentsRepository.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Repositories\\CommentsRepository.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CommentsRepository.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Repositories\\CommentsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:19:37.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "CategoriesRepository.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CategoriesRepository.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Repositories\\CategoriesRepository.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Repositories\\CategoriesRepository.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Repositories\\CategoriesRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T23:19:35.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Controllers\\UsersController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAADwv7cAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T12:31:53.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "LessonsController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\LessonsController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Controllers\\LessonsController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\LessonsController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Controllers\\LessonsController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T12:31:48.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "JWT.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\JWT.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\JWT.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\JWT.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\JWT.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:12:08.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\appsettings.json",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\appsettings.json",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-01T11:09:22.473Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "CategoryDTO.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CategoryDTO.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\DTOs\\CategoryDTO.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CategoryDTO.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\DTOs\\CategoryDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:05:58.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "CourseCreateDTO.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CourseCreateDTO.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\DTOs\\CourseCreateDTO.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CourseCreateDTO.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\DTOs\\CourseCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:04:23.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Mapping\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Mapping\\MappingProfile.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Mapping\\MappingProfile.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Mapping\\MappingProfile.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:04:05.863Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Category.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\Category.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Category.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:03:36.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Course.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Course.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\Course.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Course.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\Course.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:03:33.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\Comment.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\Comment.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:03:32.079Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Models\\ApplicationUser.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:03:31.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "CommentsController.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CommentsController.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Controllers\\CommentsController.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Controllers\\CommentsController.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Controllers\\CommentsController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAIwGEAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T11:02:38.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "CourseDTO.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CourseDTO.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\DTOs\\CourseDTO.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\DTOs\\CourseDTO.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\DTOs\\CourseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T23:53:50.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "20250427224556_UpdateCourseAndCategoryRelation.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427224556_UpdateCourseAndCategoryRelation.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427224556_UpdateCourseAndCategoryRelation.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427224556_UpdateCourseAndCategoryRelation.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427224556_UpdateCourseAndCategoryRelation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T22:45:57.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "SqlServerDbContextModelSnapshot.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\SqlServerDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\SqlServerDbContextModelSnapshot.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\SqlServerDbContextModelSnapshot.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\SqlServerDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T16:34:33.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "20250427220025_AddCategoryTable.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427220025_AddCategoryTable.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427220025_AddCategoryTable.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427220025_AddCategoryTable.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427220025_AddCategoryTable.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAIwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T22:00:25.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "20250427163346_CreateWatchedContentsTable.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427163346_CreateWatchedContentsTable.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427163346_CreateWatchedContentsTable.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427163346_CreateWatchedContentsTable.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427163346_CreateWatchedContentsTable.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T16:34:06.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "20250425223650_AddCommentsTable.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425223650_AddCommentsTable.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425223650_AddCommentsTable.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425223650_AddCommentsTable.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425223650_AddCommentsTable.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T15:04:38.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "20250427150600_RemoveIsWatchedFromLessons.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427150600_RemoveIsWatchedFromLessons.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427150600_RemoveIsWatchedFromLessons.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250427150600_RemoveIsWatchedFromLessons.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250427150600_RemoveIsWatchedFromLessons.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T15:06:19.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "20250426155956_AddEducatorIdToLesson.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250426155956_AddEducatorIdToLesson.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250426155956_AddEducatorIdToLesson.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250426155956_AddEducatorIdToLesson.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250426155956_AddEducatorIdToLesson.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T16:09:29.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "20250425013347_AddUserTypeColumn.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425013347_AddUserTypeColumn.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425013347_AddUserTypeColumn.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425013347_AddUserTypeColumn.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425013347_AddUserTypeColumn.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T01:33:47.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "20250425020435_AddEducatorIdToCourses.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020435_AddEducatorIdToCourses.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020435_AddEducatorIdToCourses.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020435_AddEducatorIdToCourses.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020435_AddEducatorIdToCourses.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwCEAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T02:04:36.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "20250424234302_InitialCreate.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250424234302_InitialCreate.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250424234302_InitialCreate.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250424234302_InitialCreate.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250424234302_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T01:33:13.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "EDMN-EgitimPortali-WebAPI.csproj",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-24T22:42:01.634Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Properties\\launchSettings.json",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-26T22:00:45.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "20250425020452_AddEducatorIdToLessons.Designer.cs",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020452_AddEducatorIdToLessons.Designer.cs",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020452_AddEducatorIdToLessons.Designer.cs",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020452_AddEducatorIdToLessons.Designer.cs",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\Migrations\\20250425020452_AddEducatorIdToLessons.Designer.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAgwB0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T16:10:16.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "EDMN-EgitimPortali-WebAPI",
+              "DocumentMoniker": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "RelativeDocumentMoniker": "EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "ToolTip": "T:\\Projects\\GoogleJulesTestProject\\EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "RelativeToolTip": "EDMN-EgitimPortali-WebAPI\\EDMN-EgitimPortali-WebAPI.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-25T01:14:14.144Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Kayıt Ol";
+
+    Layout = "_Layout"; // Assuming _layoutAdminLTE is your main layout
+}
+
+<div class="row justify-content-center" style="margin-top: 100px; margin-bottom: 50px;">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Kayıt Ol</h3>
+            </div>
+            <div class="card-body">
+                <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+
+                <div class="mb-3">
+                    <label for="fullName">Ad Soyad</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="Adınızı ve soyadınızı girin" />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email">E-posta</label>
+                    <input type="email" class="form-control" id="email" placeholder="E-posta adresinizi girin" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="username">Kullanıcı Adı</label>
+                    <input type="text" class="form-control" id="username" placeholder="Kullanıcı adınızı oluşturun" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="password">Şifre</label>
+                    <input type="password" class="form-control" id="password" placeholder="Şifrenizi girin" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordConfirm">Şifre Tekrar</label>
+                    <input type="password" class="form-control" id="passwordConfirm" placeholder="Şifrenizi tekrar girin" required />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="city">Şehir</label>
+                    <input type="text" class="form-control" id="city" placeholder="Şehrinizi girin" />
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="userType">Kullanıcı Tipi</label>
+                    <select class="form-control" id="userType" required>
+                        <option value="">Seçiniz</option>
+                        <option value="Student">Öğrenci</option>
+                        <option value="Educator">Eğitmen</option>
+                    </select>
+                    <div class="invalid-feedback">Lütfen bir kullanıcı tipi seçin.</div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" id="registerButton" class="btn btn-primary custom-signup-btn">Kayıt Ol</button>
+                <span class="span-flex">veya</span>
+                <a href="/Home/Login" class="btn btn-secondary custom-login-btn">Oturum Aç</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            // Notyf is assumed to be initialized in _layoutAdminLTE.cshtml
+
+            function displayValidationErrors(errors) {
+                var summary = $('#validationSummary');
+                summary.empty().show();
+                if (Array.isArray(errors)) {
+                    $.each(errors, function (i, error) {
+                        summary.append('<p>' + error + '</p>');
+                    });
+                } else if (typeof errors === 'string') {
+                    summary.append('<p>' + errors + '</p>');
+                } else {
+                    summary.append('<p>Kayıt sırasında hata(lar) oluştu. Lütfen kontrol edin.</p>');
+                }
+                summary.addClass('alert-danger');
+            }
+
+            function clearValidationErrors() {
+                $('#validationSummary').empty().hide().removeClass('alert-danger');
+                $('.form-control').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+            }
+
+            function showFieldValidationError(fieldId, message) {
+                var input = $('#' + fieldId);
+                input.addClass('is-invalid');
+                input.next('.invalid-feedback').text(message).show();
+            }
+
+            $('#registerButton').on('click', function (e) {
+                e.preventDefault();
+                clearValidationErrors();
+
+                var username = $('#username').val().trim();
+                var email = $('#email').val().trim();
+                var password = $('#password').val().trim();
+                var passwordConfirm = $('#passwordConfirm').val().trim();
+                var userType = $('#userType').val();
+
+                let isValid = true;
+                if (!username) { showFieldValidationError('username', 'Kullanıcı adı boş bırakılamaz.'); isValid = false; }
+                if (!email) { showFieldValidationError('email', 'E-posta boş bırakılamaz.'); isValid = false; }
+                if (!password) { showFieldValidationError('password', 'Şifre boş bırakılamaz.'); isValid = false; }
+                if (password !== passwordConfirm) {
+                    showFieldValidationError('passwordConfirm', 'Şifreler eşleşmiyor.');
+                    isValid = false;
+                }
+                if (!userType) { showFieldValidationError('userType', 'Kullanıcı tipi seçimi zorunludur.'); isValid = false; }
+
+                if (!isValid) {
+                    notyf.error("Lütfen tüm zorunlu alanları doldurun.");
+                    return;
+                }
+
+                var registerData = {
+                    username: username,
+                    email: email,
+                    password: password,
+                    userType: userType
+                };
+
+                $.ajax({
+                    url: apiBaseUrl + 'api/user/register', // Your API's register endpoint
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(registerData),
+                    success: function (response) {
+                        notyf.success("Kayıt başarıyla tamamlandı! Şimdi giriş yapabilirsiniz.");
+                        window.location.href = "/Home/Login"; // Redirect to login page
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = "Kayıt sırasında bir hata oluştu.";
+                        if (xhr.responseJSON) {
+                            if (xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            if (xhr.responseJSON.errors) {
+                                $.each(xhr.responseJSON.errors, function (field, messages) {
+                                    showFieldValidationError(field.toLowerCase(), messages.join(', '));
+                                });
+                                displayValidationErrors("Formda hata(lar) var. Lütfen kontrol edin.");
+                            }
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
+                        }
+                        notyf.error(errorMessage);
+                        console.error("Register error:", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

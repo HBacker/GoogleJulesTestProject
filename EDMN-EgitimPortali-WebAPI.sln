@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EDMN-EgitimPortali-WebAPI", "EDMN-EgitimPortali-WebAPI\EDMN-EgitimPortali-WebAPI.csproj", "{B9E07043-1369-497B-9406-078CC7516C90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EDMN-EgitimPortal", "EDMN-EgitimPortalUI\EDMN-EgitimPortal\EDMN-EgitimPortal.csproj", "{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9E07043-1369-497B-9406-078CC7516C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E07043-1369-497B-9406-078CC7516C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E07043-1369-497B-9406-078CC7516C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E07043-1369-497B-9406-078CC7516C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51067DAF-250E-4F3F-89B9-7D9DEF4419DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE3E969C-5408-4D4A-B844-0D11EFBD4BA3}
+	EndGlobalSection
+EndGlobal

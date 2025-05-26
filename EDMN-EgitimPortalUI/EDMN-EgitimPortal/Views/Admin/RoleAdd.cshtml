@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Rol Ekle";
+
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Rol Ekle</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Rol Bilgileri</h3>
+                    </div>
+                    <form id="addRoleForm">
+                        <div class="card-body">
+                            <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+
+                            <div class="form-group">
+                                <label for="roleName">Rol Adı</label>
+                                <input type="text" class="form-control" id="roleName" placeholder="Rol adını girin" required />
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                            <a href="/Admin/GetRoleList" class="btn btn-secondary">Geri Dön</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token");
+
+            if (!token) {
+                notyf.error("Giriş yapmanız gerekiyor.");
+                location.href = "/Home/Login";
+                return;
+            }
+
+            function displayValidationErrors(errors) {
+                var summary = $('#validationSummary');
+                summary.empty().show();
+                if (Array.isArray(errors)) {
+                    $.each(errors, function (i, error) {
+                        summary.append('<p>' + error + '</p>');
+                    });
+                } else if (typeof errors === 'string') {
+                    summary.append('<p>' + errors + '</p>');
+                } else {
+                    summary.append('<p>Formda hata(lar) var. Lütfen kontrol edin.</p>');
+                }
+                summary.addClass('alert-danger');
+            }
+
+            function clearValidationErrors() {
+                $('#validationSummary').empty().hide().removeClass('alert-danger');
+                $('.form-control').removeClass('is-invalid');
+                $('.invalid-feedback').text('');
+            }
+
+            function showFieldValidationError(fieldId, message) {
+                var input = $('#' + fieldId);
+                input.addClass('is-invalid');
+                input.next('.invalid-feedback').text(message).show();
+            }
+
+            $('#addRoleForm').on('submit', function (e) {
+                e.preventDefault();
+                clearValidationErrors();
+
+                var roleName = $('#roleName').val().trim();
+
+                let isValid = true;
+                if (!roleName) {
+                    showFieldValidationError('roleName', 'Rol adı zorunludur.');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    notyf.error("Lütfen tüm zorunlu alanları doldurun.");
+                    return;
+                }
+
+                var roleData = {
+                    name: roleName
+                };
+
+                $.ajax({
+                    url: apiBaseUrl + '/roles', // Hypothetical API endpoint for adding a role
+                    type: 'POST',
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify(roleData),
+                    success: function (response) {
+                        notyf.success("Rol başarıyla eklendi!");
+                        window.location.href = '/Admin/GetRoleList';
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = "Rol eklenirken bir hata oluştu.";
+                        if (xhr.responseJSON) {
+                            if (xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            if (xhr.responseJSON.errors) {
+                                $.each(xhr.responseJSON.errors, function(field, messages) {
+                                    showFieldValidationError(field.toLowerCase(), messages.join(', '));
+                                });
+                                displayValidationErrors("Formda hata(lar) var. Lütfen kontrol edin.");
+                            }
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
+                        }
+                        notyf.error(errorMessage);
+                        console.error("Rol ekleme hatası:", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

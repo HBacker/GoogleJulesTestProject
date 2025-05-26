@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EDMN-EgitimPortali-WebAPI.props" />
+</Project>
