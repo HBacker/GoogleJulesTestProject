@@ -74,13 +74,11 @@
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // Notyf global olarak _layoutAdminLTE.cshtml'de başlatıldığı için burada tekrar tanımlanmıyor.
-
         $(document).ready(function () {
             var apiBaseUrl = "@ViewBag.ApiBaseUrl";
             var token = localStorage.getItem("token");
             var courseId = $('#courseId').val();
-            var currentCoursePhotoFileName = ''; // Mevcut fotoğrafın dosya adını tutacak değişken
+            var currentCoursePhotoFileName = ''; 
 
             if (!token) {
                 notyf.error("Giriş yapmanız gerekiyor.");
@@ -115,24 +113,23 @@
                 input.next('.invalid-feedback').text(message).show();
             }
 
-            function getCategories(selectedCategoryIds = []) { // Çoklu kategori ID'leri alacak şekilde parametre adı korundu
+            function getCategories(selectedCategoryIds = []) { 
                 $.ajax({
-                    url: apiBaseUrl + '/categories', // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                    url: apiBaseUrl + '/categories', 
                     type: 'GET',
                     headers: { "Authorization": "Bearer " + token },
                     contentType: "application/json",
                     success: function (data) {
-                        console.log("Kategoriler API'den alındı:", data); // Debugging için eklendi
-                        var categorySelect = $("#categoryIds"); // ID korundu
+                        console.log("Kategoriler API'den alındı:", data); 
+                        var categorySelect = $("#categoryIds"); 
                         categorySelect.empty();
 
-                        if (Array.isArray(data)) { // Gelen verinin dizi olduğundan emin ol
+                        if (Array.isArray(data)) { 
                             $.each(data, function (i, item) {
                                 var option = $('<option>', {
-                                    value: item.id, // ID'yi value olarak ata
+                                    value: item.id, 
                                     text: item.name
                                 });
-                                // selectedCategoryIds bir dizi olduğu için includes kullanıldı
                                 if (selectedCategoryIds.includes(item.id)) {
                                     option.prop('selected', true);
                                 }
@@ -152,7 +149,7 @@
 
             function fetchCourseDetails() {
                 $.ajax({
-                    url: apiBaseUrl + '/courses/' + courseId, // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                    url: apiBaseUrl + '/courses/' + courseId, 
                     type: 'GET',
                     headers: { "Authorization": "Bearer " + token },
                     success: function (data) {
@@ -160,16 +157,13 @@
                         $('#description').val(data.description);
                         $('#content').val(data.content);
 
-                        // Mevcut fotoğraf dosya adını sakla
                         currentCoursePhotoFileName = data.photoUrl || '';
 
-                        // API'den gelen kategori Id'lerini alıp getCategories'e gönder
                         var currentCategoryIds = data.categories ? data.categories.map(c => c.id) : [];
                         getCategories(currentCategoryIds);
 
                         if (data.photoUrl && data.photoUrl !== '-') {
                             $('#currentPhotoName').text(data.photoUrl);
-                            // Mevcut fotoğraf yolu düzeltildi: /uploads/courses/ + dosya adı
                             $('#currentPhotoPreview').attr('src', '/uploads/courses/' + data.photoUrl).show();
                             $('#currentPhotoInfo').show();
                         } else {
@@ -193,7 +187,7 @@
                 });
             }
 
-            fetchCourseDetails(); // Sayfa yüklendiğinde kurs detaylarını getir
+            fetchCourseDetails(); 
 
             $('#editCourseForm').on('submit', function (e) {
                 e.preventDefault();
@@ -202,14 +196,13 @@
                 var title = $('#title').val().trim();
                 var description = $('#description').val().trim();
                 var content = $('#content').val().trim();
-                var categoryIds = $('#categoryIds').val(); // Çoklu kategori seçimi için ID'ler dizisi alınır
+                var categoryIds = $('#categoryIds').val(); 
                 var photoFile = $('#photoFile')[0].files[0];
 
                 let isValid = true;
                 if (!title) { showFieldValidationError('title', 'Başlık zorunludur.'); isValid = false; }
                 if (!description) { showFieldValidationError('description', 'Açıklama zorunludur.'); isValid = false; }
 
-                // Çoklu kategori seçimi için kontrol: null veya boş dizi olmamalı
                 if (!categoryIds || categoryIds.length === 0) { showFieldValidationError('categoryIds', 'En az bir kategori seçimi zorunludur.'); isValid = false; }
 
                 if (!isValid) {
@@ -217,19 +210,17 @@
                     return;
                 }
 
-                // Fotoğraf yükleme ve kurs güncelleme işlemini ayır
                 if (photoFile) {
                     var photoFormData = new FormData();
                     photoFormData.append('photoFile', photoFile);
 
                     $.ajax({
-                        url: '/Admin/UploadCoursePhoto', // C# metodu için belirtilen yol
+                        url: '/Admin/UploadCoursePhoto', 
                         type: 'POST',
                         data: photoFormData,
                         processData: false,
                         contentType: false,
                         success: function (uploadedFileName) {
-                            // Fotoğraf yüklendikten sonra kursu güncelle
                             updateCourse(uploadedFileName);
                         },
                         error: function (xhr) {
@@ -238,7 +229,6 @@
                         }
                     });
                 } else {
-                    // Yeni fotoğraf seçilmediyse, mevcut fotoğraf adını kullanarak kursu güncelle
                     updateCourse(currentCoursePhotoFileName);
                 }
 
@@ -247,18 +237,18 @@
                         title: title,
                         description: description,
                         content: content,
-                        photoUrl: photoFileName || null, // Yeni dosya adı veya mevcut dosya adı
-                        categoryIds: categoryIds.map(Number) // ID'leri sayı dizisine çevir
+                        photoUrl: photoFileName || null, 
+                        categoryIds: categoryIds.map(Number) 
                     };
 
                     $.ajax({
-                        url: apiBaseUrl + '/courses/' + courseId, // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                        url: apiBaseUrl + '/courses/' + courseId, 
                         type: 'PUT',
                         headers: {
                             "Authorization": "Bearer " + token,
-                            "Content-Type": "application/json" // JSON gönderildiği için Content-Type belirtilmeli
+                            "Content-Type": "application/json" 
                         },
-                        data: JSON.stringify(payload), // JSON olarak gönder
+                        data: JSON.stringify(payload), 
                         success: function (response) {
                             notyf.success("Kurs başarıyla güncellendi!");
                             window.location.href = '/Admin/List';
@@ -270,12 +260,11 @@
                                     errorMessage = xhr.responseJSON.message;
                                 }
                                 if (xhr.responseJSON.errors) {
-                                    // Hata mesajlarını ilgili alanlara göster
-                                    if (xhr.responseJSON.errors.CategoryIds) { // Çoklu kategori ID'leri için hata kontrolü
+                                    if (xhr.responseJSON.errors.CategoryIds) { 
                                         showFieldValidationError('categoryIds', xhr.responseJSON.errors.CategoryIds.join(', '));
                                     }
                                     $.each(xhr.responseJSON.errors, function (field, messages) {
-                                        if (field.toLowerCase() !== 'categoryids') { // categoryIds zaten işlendi
+                                        if (field.toLowerCase() !== 'categoryids') { 
                                             showFieldValidationError(field.toLowerCase(), messages.join(', '));
                                         }
                                     });

@@ -99,16 +99,10 @@ public class AdminController : Controller
         return View();
     }
 
-    public IActionResult RoleAdd()
+    public IActionResult ManageUserRoles(string userId)
     {
         ViewBag.ApiBaseUrl = ApiBaseUrl;
-        _notify.Information("Rol ekleme sayfası açıldı.");
-        return View();
-    }
-
-    public IActionResult ManageUserRoles()
-    {
-        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        ViewBag.UserId = userId;
         _notify.Information("Kullanıcı rol yönetimi sayfası yüklendi.");
         return View();
     }
@@ -171,6 +165,28 @@ public class AdminController : Controller
         }
     }
 
+    public IActionResult CategoryList()
+    {
+        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        _notify.Information("Kategori listesi sayfası yüklendi.");
+        return View();
+    }
+
+    public IActionResult CreateCategory()
+    {
+        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        _notify.Information("Yeni kategori oluşturma sayfası yüklendi.");
+        return View();
+    }
+
+    public IActionResult EditCategory(int id)
+    {
+        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        ViewBag.CategoryId = id;
+        _notify.Information($"Kategori düzenleme sayfası yüklendi (ID: {id}).");
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> UploadLessonVideo(IFormFile videoFile)
     {
@@ -221,7 +237,7 @@ public class AdminController : Controller
             // For unique filenames, consider:
             // var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(thumbnailFile.FileName);
             var fileName = Path.GetFileName(thumbnailFile.FileName); // Using original filename for consistency for now
-            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "lessons", "thumbnails");
+            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "lessons", "thumbs");
 
             if (!Directory.Exists(uploadsPath))
                 Directory.CreateDirectory(uploadsPath);

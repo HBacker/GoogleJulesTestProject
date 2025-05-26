@@ -1,0 +1,216 @@
+﻿@{
+    ViewData["Title"] = "Kategori Düzenle";
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">@ViewData["Title"]</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">Kategori Bilgileri</h3>
+                    </div>
+                    <form id="editCategoryForm">
+                        <input type="hidden" id="categoryId" value="@ViewBag.CategoryId" />
+                        <div class="card-body">
+                            <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+                            <div class="form-group">
+                                <label for="categoryName">Kategori Adı</label>
+                                <input type="text" class="form-control" id="categoryName" placeholder="Kategori adını girin" required />
+                                <div class="invalid-feedback">Kategori adı zorunludur.</div>
+                            </div>
+                             <div id="loadingCategory" class="text-center p-4" style="display:none;">
+                                <div class="spinner-border text-warning" role="status">
+                                    <span class="visually-hidden">Yükleniyor...</span>
+                                </div>
+                                <p class="mt-2">Kategori bilgileri yükleniyor...</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save mr-1"></i> Kaydet
+                            </button>
+                            <a href="/Admin/CategoryList" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left mr-1"></i> Geri Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token");
+            var categoryId = $('#categoryId').val();
+
+            if (!token) {
+                if (typeof notyf !== 'undefined') {
+                    notyf.error("Giriş yapmanız gerekiyor.");
+                }
+                $('#editCategoryForm button[type="submit"]').prop('disabled', true);
+                return;
+            }
+
+            if (!categoryId) {
+                 if (typeof notyf !== 'undefined') {
+                    notyf.error("Kategori ID'si bulunamadı.");
+                }
+                window.location.href = '/Admin/CategoryList';
+                return;
+            }
+            
+            function displayValidationErrors(errors) {
+                var summary = $('#validationSummary');
+                summary.empty().show().addClass('alert-danger');
+                if (Array.isArray(errors)) {
+                    errors.forEach(error => {
+                        summary.append($('<p></p>').text(error));
+                    });
+                } else if (typeof errors === 'string') {
+                     summary.append($('<p></p>').text(errors));
+                } else {
+                    summary.append($('<p></p>').text('Formda hata(lar) var. Lütfen kontrol edin.'));
+                }
+            }
+
+            function clearValidationErrors() {
+                $('#validationSummary').empty().hide().removeClass('alert-danger');
+                $('#categoryName').removeClass('is-invalid');
+            }
+            
+            function showFieldValidationError(fieldId, message) {
+                const input = $('#' + fieldId);
+                input.addClass('is-invalid');
+                input.next('.invalid-feedback').text(message).show(); 
+            }
+
+            function fetchCategoryDetails() {
+                $('#loadingCategory').show();
+                $('#editCategoryForm .form-group, #editCategoryForm .card-footer').hide();
+
+
+                $.ajax({
+                    url: apiBaseUrl + '/categories/' + categoryId,
+                    type: 'GET',
+                    headers: { "Authorization": "Bearer " + token },
+                    success: function (data) {
+                        $('#loadingCategory').hide();
+                        $('#editCategoryForm .form-group, #editCategoryForm .card-footer').show();
+                        if (data && data.name) {
+                            $('#categoryName').val(data.name);
+                        } else {
+                            if (typeof notyf !== 'undefined') {
+                                notyf.error("Kategori verisi alınamadı veya eksik.");
+                            }
+                             $('#editCategoryForm button[type="submit"]').prop('disabled', true);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('#loadingCategory').hide();
+                        var errorMessage = "Kategori bilgileri yüklenirken bir hata oluştu.";
+                         if (xhr.status === 404) {
+                            errorMessage = "Kategori bulunamadı.";
+                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                        if (typeof notyf !== 'undefined') {
+                            notyf.error(errorMessage);
+                        }
+                        displayValidationErrors(errorMessage);
+                        $('#editCategoryForm button[type="submit"]').prop('disabled', true);
+                        console.error("Kategori yükleme hatası:", xhr.responseText);
+                    }
+                });
+            }
+
+            fetchCategoryDetails();
+
+            $('#editCategoryForm').on('submit', function (e) {
+                e.preventDefault();
+                clearValidationErrors();
+
+                var categoryName = $('#categoryName').val().trim();
+
+                if (!categoryName) {
+                    showFieldValidationError('categoryName', 'Kategori adı zorunludur.');
+                    if (typeof notyf !== 'undefined') {
+                        notyf.error("Lütfen kategori adını girin.");
+                    }
+                    return;
+                }
+                
+                const $submitButton = $(this).find('button[type="submit"]');
+                $submitButton.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Kaydediliyor...');
+
+                $.ajax({
+                    url: apiBaseUrl + '/categories/' + categoryId,
+                    type: 'PUT',
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({ name: categoryName }),
+                    success: function (response) {
+                        if (typeof notyf !== 'undefined') {
+                            notyf.success("Kategori başarıyla güncellendi!");
+                        }
+                        setTimeout(function() {
+                            window.location.href = '/Admin/CategoryList';
+                        }, 1500);
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = "Kategori güncellenirken bir hata oluştu.";
+                         if (xhr.responseJSON) {
+                            if (xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            if (xhr.responseJSON.errors) {
+                                let errorsDisplayed = false;
+                                for (const field in xhr.responseJSON.errors) {
+                                     showFieldValidationError(field.toLowerCase() === 'name' ? 'categoryName' : field.toLowerCase(), xhr.responseJSON.errors[field].join(', '));
+                                    errorsDisplayed = true;
+                                }
+                                 if (errorsDisplayed) {
+                                   displayValidationErrors("Lütfen formdaki hataları düzeltin.");
+                                } else {
+                                   displayValidationErrors(errorMessage);
+                                }
+                            } else {
+                                displayValidationErrors(errorMessage);
+                            }
+                        } else if (xhr.responseText) {
+                           try {
+                                var err = JSON.parse(xhr.responseText);
+                                if (err && err.message) errorMessage = err.message;
+                            } catch(e) {}
+                           displayValidationErrors(errorMessage);
+                        } else {
+                             displayValidationErrors(errorMessage);
+                        }
+                        if (typeof notyf !== 'undefined') {
+                            notyf.error(errorMessage);
+                        }
+                        console.error("Kategori güncelleme hatası:", xhr.responseText);
+                        $submitButton.prop('disabled', false).html('<i class="fas fa-save mr-1"></i> Kaydet');
+                    }
+                });
+            });
+        });
+    </script>
+}

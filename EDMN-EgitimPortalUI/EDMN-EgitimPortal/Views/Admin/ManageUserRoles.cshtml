@@ -1,6 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Kullanıcı Rolleri Yönetimi";
-
+    ViewData["Title"] = "Kullanıcı Tipi Yönetimi";
     Layout = "_layoutAdminLTE";
 }
 
@@ -8,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Kullanıcı Rolleri Yönetimi</h1>
+                <h1 class="m-0">@ViewData["Title"]</h1>
             </div>
         </div>
     </div>
@@ -20,28 +19,27 @@
             <div class="col-md-8">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Kullanıcı Rolleri (<span id="userName">Yükleniyor...</span>)</h3>
+                        <h3 class="card-title">Kullanıcı Tipi (<span id="userName">Yükleniyor...</span>)</h3>
                     </div>
                     <div class="card-body">
                         <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
                         <input type="hidden" id="userId" value="@ViewBag.UserId" />
 
                         <div class="form-group">
-                            <label>Mevcut Roller</label>
-                            <div id="currentRolesDisplay" class="mb-3">
+                            <label>Mevcut Kullanıcı Tipi</label>
+                            <div id="currentUserTypeDisplay" class="mb-3">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="availableRoles">Rol Ata/Kaldır</label>
-                            <select class="form-control" id="availableRoles" multiple="multiple">
+                            <label for="selectUserType">Kullanıcı Tipi Ata</label>
+                            <select class="form-control" id="selectUserType">
                             </select>
-                            <small class="form-text text-muted">Ctrl (Windows) / Command (Mac) tuşuna basılı tutarak birden fazla rol seçebilirsiniz.</small>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" class="btn btn-primary" id="updateRolesBtn">
-                            <i class="fas fa-save me-2"></i> Rolleri Güncelle
+                        <button type="button" class="btn btn-primary" id="updateUserTypeBtn">
+                            <i class="fas fa-save me-2"></i> Kullanıcı Tipini Güncelle
                         </button>
                         <a href="/Admin/GetUserList" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Geri Dön
@@ -59,6 +57,7 @@
             var apiBaseUrl = "@ViewBag.ApiBaseUrl";
             var token = localStorage.getItem("token");
             var userId = "@ViewBag.UserId";
+            const availableUserTypes = ["Admin", "Educator", "Student"];
 
             if (!token) {
                 notyf.error("Giriş yapmanız gerekiyor.");
@@ -77,12 +76,12 @@
                 summary.empty().show();
                 if (Array.isArray(errors)) {
                     $.each(errors, function (i, error) {
-                        summary.append('<p>' + error + '</p>');
+                        summary.append($('<p></p>').text(error));
                     });
                 } else if (typeof errors === 'string') {
-                    summary.append('<p>' + errors + '</p>');
+                    summary.append($('<p></p>').text(errors));
                 } else {
-                    summary.append('<p>Formda hata(lar) var. Lütfen kontrol edin.</p>');
+                    summary.append($('<p></p>').text('Formda hata(lar) var. Lütfen kontrol edin.'));
                 }
                 summary.addClass('alert-danger');
             }
@@ -90,26 +89,37 @@
             function clearValidationErrors() {
                 $('#validationSummary').empty().hide().removeClass('alert-danger');
             }
+            
+            function populateUserTypeDropdown(currentUserType) {
+                var userTypeSelect = $('#selectUserType');
+                userTypeSelect.empty();
+                availableUserTypes.forEach(function(type) {
+                    var option = $('<option>', {
+                        value: type,
+                        text: type
+                    });
+                    if (currentUserType === type) {
+                        option.prop('selected', true);
+                    }
+                    userTypeSelect.append(option);
+                });
+            }
 
-            // Function to fetch user details and populate current roles
             function fetchUserDetails() {
                 $.ajax({
-                    url: apiBaseUrl + '/user/' + userId, // Your API endpoint to get a single user's details
+                    url: apiBaseUrl + '/user/' + userId, 
                     type: 'GET',
                     headers: { "Authorization": "Bearer " + token },
                     success: function (data) {
                         $('#userName').text(data.username || data.email || 'Kullanıcı');
-                        var currentRolesDisplay = $('#currentRolesDisplay');
-                        currentRolesDisplay.empty();
-                        if (data.roles && data.roles.length > 0) {
-                            $.each(data.roles, function (i, role) {
-                                currentRolesDisplay.append(`<span class="badge badge-info mr-1">${role}</span>`);
-                            });
+                        var currentUserTypeDisplay = $('#currentUserTypeDisplay');
+                        currentUserTypeDisplay.empty();
+                        if (data.userType) {
+                            currentUserTypeDisplay.append(`<span class="badge badge-info">${data.userType}</span>`);
                         } else {
-                            currentRolesDisplay.append('<span class="text-muted">Bu kullanıcının rolü yok.</span>');
+                            currentUserTypeDisplay.append('<span class="text-muted">Bu kullanıcının tipi atanmamış.</span>');
                         }
-                        // After fetching user details, fetch all roles and pre-select current ones
-                        fetchAllRoles(data.roles || []);
+                        populateUserTypeDropdown(data.userType);
                     },
                     error: function (xhr, status, error) {
                         var errorMessage = "Kullanıcı detayları yüklenirken bir hata oluştu.";
@@ -121,62 +131,29 @@
                             errorMessage = xhr.responseText;
                         }
                         notyf.error(errorMessage);
-                        console.error("Kullanıcı detayı yükleme hatası:", xhr.responseText);
                         window.location.href = '/Admin/GetUserList';
                     }
                 });
             }
 
-            // Function to fetch all available roles and populate the multi-select
-            function fetchAllRoles(userCurrentRoles = []) {
-                $.ajax({
-                    url: apiBaseUrl + '/roles', // Hypothetical API endpoint for all roles
-                    type: 'GET',
-                    headers: { "Authorization": "Bearer " + token },
-                    success: function (data) {
-                        var availableRolesSelect = $('#availableRoles');
-                        availableRolesSelect.empty();
-                        $.each(data, function (i, role) {
-                            var option = $('<option>', {
-                                value: role.name, // Assuming role object has a 'name' property
-                                text: role.name
-                            });
-                            if (userCurrentRoles.includes(role.name)) {
-                                option.prop('selected', true);
-                            }
-                            availableRolesSelect.append(option);
-                        });
-                        // If using Select2, initialize it here:
-                        // $('#availableRoles').select2();
-                    },
-                    error: function (xhr, status, error) {
-                        notyf.error("Roller yüklenirken bir sorun oluştu.");
-                        console.error("Rol yükleme hatası:", xhr.responseText);
-                    }
-                });
-            }
+            fetchUserDetails(); 
 
-            fetchUserDetails(); // Start by fetching user details which then triggers fetching all roles
-
-            $('#updateRolesBtn').on('click', function () {
+            $('#updateUserTypeBtn').on('click', function () {
                 clearValidationErrors();
-                var selectedRoles = $('#availableRoles').val(); // Array of selected role names
+                var selectedUserType = $('#selectUserType').val(); 
 
-                if (!selectedRoles) {
-                    selectedRoles = []; // Ensure it's an empty array if nothing is selected
+                if (!selectedUserType) {
+                     notyf.error("Lütfen bir kullanıcı tipi seçin.");
+                    return;
                 }
 
                 var updateData = {
                     userId: userId,
-                    newUserRole: selectedRoles.length > 0 ? selectedRoles[0] : null // API schema expects single newUserRole string
-                    // NOTE: Your API schema for UserRoleUpdateDTO only allows a single 'newUserRole' (string).
-                    // If a user can have multiple roles, your API needs to be updated to accept an array of roles.
-                    // For now, I'm sending only the first selected role, or null if none.
-                    // You MUST adjust your API or this client-side logic if multiple roles are intended.
+                    newUserRole: selectedUserType 
                 };
 
                 $.ajax({
-                    url: apiBaseUrl + '/user/update-role', // Your API endpoint for updating user roles
+                    url: apiBaseUrl + '/user/update-role', 
                     type: 'PUT',
                     headers: {
                         "Authorization": "Bearer " + token,
@@ -184,22 +161,22 @@
                     },
                     data: JSON.stringify(updateData),
                     success: function (response) {
-                        notyf.success("Kullanıcı rolleri başarıyla güncellendi!");
-                        // Refresh user details to show updated roles
+                        notyf.success("Kullanıcı tipi başarıyla güncellendi!");
                         fetchUserDetails();
                     },
                     error: function (xhr, status, error) {
-                        var errorMessage = "Roller güncellenirken bir hata oluştu.";
+                        var errorMessage = "Kullanıcı tipi güncellenirken bir hata oluştu.";
                         if (xhr.responseJSON) {
                             if (xhr.responseJSON.message) {
                                 errorMessage = xhr.responseJSON.message;
                             }
-                            // Specific error handling for roles update might be needed if API returns detailed errors
+                             if (xhr.responseJSON.errors) {
+                                displayValidationErrors(Object.values(xhr.responseJSON.errors).flat());
+                            }
                         } else if (xhr.responseText) {
                             errorMessage = xhr.responseText;
                         }
                         notyf.error(errorMessage);
-                        console.error("Rol güncelleme hatası:", xhr.responseText);
                     }
                 });
             });

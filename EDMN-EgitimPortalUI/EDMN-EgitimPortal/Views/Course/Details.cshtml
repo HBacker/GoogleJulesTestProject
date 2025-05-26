@@ -219,11 +219,9 @@
         $(document).ready(function () {
             var apiBaseUrl = "@ViewBag.ApiBaseUrl";
             var token = localStorage.getItem("token");
-            var courseId = window.location.pathname.split('/').pop(); // URL'den kurs ID'sini al
+            var courseId = window.location.pathname.split('/').pop(); 
+            let currentLessonId = null; 
 
-            let currentLessonId = null; // Şu anda oynatılan dersin ID'si
-
-            // Notyf'ın _Layout.cshtml'de veya notification.js'de başlatıldığı varsayılır.
             if (typeof notyf === 'undefined') {
                 var notyf = new Notyf({
                     duration: 3000,
@@ -235,14 +233,11 @@
                 try {
                     return JSON.parse(atob(token.split('.')[1]));
                 } catch (e) {
-                    console.error("Error parsing JWT: ", e); // Log error for debugging
                     return null;
                 }
             }
 
-            // Kurs detaylarını ve dersleri yükle
             function loadCourseDetails() {
-                // Yükleniyor mesajını göster
                 $('#courseContentArea').html(`
                     <div class="text-center p-5">
                         <div class="spinner-border text-primary" role="status">
@@ -252,15 +247,12 @@
                     </div>
                 `);
 
-                // Kurs detaylarını çek
                 $.ajax({
-                    url: apiBaseUrl + 'api/courses/' + courseId,
+                    url: apiBaseUrl + '/courses/' + courseId,
                     type: 'GET',
                     headers: {
-                        // "Authorization": "Bearer " + token // Kurs detayları halka açık olabilir
                     },
                     success: function (courseData) {
-                        // HTML yapısını oluştur
                         let courseHtml = `
                             <div class="course-page">
                                 <div class="main-content">
@@ -279,14 +271,13 @@
                                         <h1 class="course-title">${courseData.title || 'Kurs Başlığı Yok'}</h1>
                                         <p class="course-description">${courseData.description || 'Açıklama yok'}</p>
                                         <div class="course-full-content">
-                                            ${courseData.content ? courseData.content.split('\r\n\r\n').map(p => `<p style="font-size:larger; font-weight:400">${p}</p>`).join('') : ''}
+                                            ${courseData.content ? courseData.content.split('\r\n\r\n').map(p => `<p style="font-size:larger; font-weight:400">${p.replace(/\r?\n/g, '<br />')}</p>`).join('') : ''}
                                         </div>
                                     </div>
 
                                     <div class="comments-section mt-4">
                                         <h3>Yorumlar</h3>
                                         <div id="commentsList" class="mb-3">
-                                            <!-- Comments will be loaded here -->
                                         </div>
                                         <h4>Yorum Ekle</h4>
                                         <form id="addCommentForm">
@@ -309,9 +300,7 @@
                         `;
                         $('#courseContentArea').html(courseHtml);
 
-                        // Dersleri çek ve listele
                         fetchLessons(courseId);
-                        // Yorumları çek ve listele
                         fetchAndDisplayComments(courseId);
                     },
                     error: function (xhr, status, error) {
@@ -325,33 +314,29 @@
                         }
                         notyf.error(errorMessage);
                         $('#courseContentArea').html(`<div class="alert alert-danger">${errorMessage}</div><a href="/" class="btn btn-primary mt-3">Anasayfaya Dön</a>`);
-                        console.error("Kurs detayı yükleme hatası:", xhr.responseText);
                     }
                 });
             }
 
-            // Yorumları çek ve göster
             function fetchAndDisplayComments(courseId) {
                 var commentsList = $('#commentsList');
                 commentsList.html('<p class="text-center">Yorumlar yükleniyor...</p>'); 
 
-                // Token ve kullanıcı bilgilerini al
-                var localToken = localStorage.getItem("token"); // Renamed to avoid conflict with global 'token'
+                var localToken = localStorage.getItem("token"); 
                 var decodedToken = localToken ? parseJwt(localToken) : null;
                 var currentUserId = decodedToken ? decodedToken.nameid : null;
-                // Handle roles being a single string or an array
                 var currentUserRoles = [];
                 if (decodedToken && decodedToken.role) {
                     currentUserRoles = Array.isArray(decodedToken.role) ? decodedToken.role : [decodedToken.role];
                 }
 
                 $.ajax({
-                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments',
+                    url: apiBaseUrl + '/courses/' + courseId + '/comments',
                     type: 'GET',
                     success: function (comments) {
                         commentsList.empty(); 
                         if (comments && comments.length > 0) {
-                            comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Newest first
+                            comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); 
 
                             $.each(comments, function (index, comment) {
                                 var commentCard = $('<div>').addClass('comment-item card mb-2');
@@ -365,14 +350,13 @@
                                     .addClass('btn btn-sm btn-danger delete-comment-btn float-end')
                                     .attr('data-comment-id', comment.id)
                                     .text('Sil')
-                                    .hide(); // Initially hidden
+                                    .hide(); 
 
-                                // Conditionally show delete button
                                 if (currentUserId && (comment.userId === currentUserId || currentUserRoles.includes('Admin'))) {
                                     deleteButton.show();
                                 }
 
-                                cardBody.append(deleteButton); // Add button first so it can float right
+                                cardBody.append(deleteButton); 
                                 cardBody.append(commentTextP);
                                 cardBody.append(authorAndDate);
                                 commentCard.append(cardBody);
@@ -383,31 +367,28 @@
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.error("Yorumları yükleme hatası:", error);
                         commentsList.html('<p class="text-center text-danger">Yorumlar yüklenirken bir hata oluştu.</p>');
                     }
                 });
             }
 
-            // Dersleri çek ve listeyi doldur
             function fetchLessons(courseId) {
                 $.ajax({
-                    url: apiBaseUrl + 'api/lessons?courseId=' + courseId, // API'nizin courseId'ye göre filtrelemeyi desteklediği varsayılır
+                    url: apiBaseUrl + '/lessons?courseId=' + courseId, 
                     type: 'GET',
                     headers: {
-                        "Authorization": "Bearer " + token // Dersler için kimlik doğrulama gerekli olabilir
+                        "Authorization": "Bearer " + token 
                     },
                     success: function (lessonsData) {
                         var lessonsList = $('#lessonsList');
                         lessonsList.empty();
 
                         if (lessonsData && lessonsData.length > 0) {
-                            // Order lessons by OrderNo
                             lessonsData.sort((a, b) => a.orderNo - b.orderNo);
 
                             $.each(lessonsData, function (i, lesson) {
-                                var thumbnailUrl = lesson.thumbnailUrl && lesson.thumbnailUrl !== '-' ? `/thumbnails/${lesson.thumbnailUrl}` : '/CoursePhotos/thumbnails/defaultCourseCover.png';
-                                var videoUrl = lesson.videoUrl ? `/videos/${lesson.videoUrl}` : null; // Video URL'si yoksa null
+                                var thumbnailUrl = lesson.thumbnailUrl && lesson.thumbnailUrl !== '-' ? `/uploads/lessons/thumbs/${lesson.thumbnailUrl}` : '/CoursePhotos/thumbnails/defaultCourseCover.png';
+                                var videoUrl = lesson.videoUrl ? `/videos/${lesson.videoUrl}` : null; 
 
                                 var lessonItem = `
                                     <div class="lesson-item" data-lesson-id="${lesson.id}" data-video-url="${videoUrl || ''}" data-lesson-title="${lesson.title || ''}">
@@ -427,11 +408,9 @@
                                 lessonsList.append(lessonItem);
                             });
 
-                            // İlk dersi otomatik olarak oynat (eğer varsa)
-                            if (lessonsData.length > 0 && token) { // Sadece giriş yapmışsa ve ders varsa
+                            if (lessonsData.length > 0 && token) { 
                                 playLesson(lessonsData[0].id, lessonsData[0].videoUrl, lessonsData[0].title);
                             } else if (!token) {
-                                // Giriş yapmamışsa dersleri gösterme veya video oynatma
                                 $('#videoPlaceholder').html('<p class="login-required-area">Dersleri görüntülemek için önce giriş yapmanız gerekiyor!</p>');
                                 $('#courseVideo').hide();
                                 lessonsList.html('<p class="text-center text-muted mt-3">Dersleri görmek için giriş yapın.</p>');
@@ -463,12 +442,10 @@
                             errorMessage = xhr.responseText;
                         }
                         notyf.error(errorMessage);
-                        console.error("Ders yükleme hatası:", xhr.responseText);
                     }
                 });
             }
 
-            // Ders oynatma ve izlenen içeriği işaretleme
             function playLesson(lessonId, videoUrl, lessonTitle) {
                 if (!token) {
                     notyf.error("Dersleri oynatmak için giriş yapmanız gerekiyor.");
@@ -485,30 +462,26 @@
                 const videoPlayer = $('#courseVideo');
                 videoPlayer.attr('src', videoUrl).show();
                 $('#videoPlaceholder').hide();
-                videoPlayer[0].load(); // Video'yu yükle
-                videoPlayer[0].play(); // Video'yu oynat
+                videoPlayer[0].load(); 
+                videoPlayer[0].play(); 
 
-                currentLessonId = lessonId; // Şu an oynatılan dersi ayarla
+                currentLessonId = lessonId; 
 
-                // Aktif dersi işaretle
                 $('.lesson-item').removeClass('active');
                 $(`.lesson-item[data-lesson-id="${lessonId}"]`).addClass('active');
 
-                // Video bittiğinde izlendi olarak işaretle
                 videoPlayer.off('ended').on('ended', function() {
                     markLessonAsWatched(lessonId);
                 });
             }
 
-            // Dersi izlendi olarak işaretle
             function markLessonAsWatched(lessonId) {
                 if (!token) {
-                    console.warn("Token yok, ders izlendi olarak işaretlenemedi.");
                     return;
                 }
 
                 $.ajax({
-                    url: apiBaseUrl + 'api/watched-contents', // WatchedContents API endpoint
+                    url: apiBaseUrl + '/watched-contents', 
                     type: 'POST',
                     headers: {
                         "Authorization": "Bearer " + token,
@@ -517,17 +490,12 @@
                     data: JSON.stringify({ lessonId: lessonId }),
                     success: function (response) {
                         notyf.success("Ders izlendi olarak işaretlendi!");
-                        console.log("Ders izlendi:", response);
-                        // İsteğe bağlı: UI'da dersin izlendiğini gösteren bir işaret ekle
                     },
                     error: function (xhr, status, error) {
-                        console.error("Ders izlendi olarak işaretlenirken hata:", xhr.responseText);
-                        // notyf.error("Ders izlendi olarak işaretlenirken bir sorun oluştu.");
                     }
                 });
             }
 
-            // Ders listesindeki öğelere tıklama olayı
             $(document).on('click', '.lesson-item', function (e) {
                 e.preventDefault();
                 const lessonId = $(this).data('lesson-id');
@@ -536,10 +504,8 @@
                 playLesson(lessonId, videoUrl, lessonTitle);
             });
 
-            // Sayfa yüklendiğinde kurs detaylarını yükle
             loadCourseDetails();
 
-            // Yorum ekleme formu gönderimi
             $(document).on('submit', '#addCommentForm', function(event) {
                 event.preventDefault();
 
@@ -549,19 +515,16 @@
                     return;
                 }
 
-                // Token'ı localStorage'dan al (zaten global 'token' değişkeninde var ama en güncel halini almak iyi olabilir)
                 var currentToken = localStorage.getItem("token"); 
                 if (!currentToken) {
                     notyf.error("Yorum yapmak için giriş yapmalısınız.");
-                    // İsteğe bağlı: Giriş sayfasına yönlendirme
-                    // window.location.href = "/Home/Login"; 
                     return;
                 }
 
                 $('#submitCommentBtn').prop('disabled', true).text('Gönderiliyor...');
 
                 $.ajax({
-                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments',
+                    url: apiBaseUrl + '/courses/' + courseId + '/comments',
                     type: 'POST',
                     headers: {
                         "Authorization": "Bearer " + currentToken,
@@ -569,16 +532,14 @@
                     },
                     data: JSON.stringify({ text: commentText }),
                     success: function(response) {
-                        $('#newCommentText').val(''); // Textarea'yı temizle
+                        $('#newCommentText').val(''); 
                         notyf.success("Yorum başarıyla eklendi.");
-                        fetchAndDisplayComments(courseId); // Yorum listesini yenile
+                        fetchAndDisplayComments(courseId); 
                     },
                     error: function(xhr, status, error) {
-                        console.error("Yorum ekleme hatası:", xhr.responseText);
                         if (xhr.status === 401) {
                             notyf.error("Yorum yapmak için giriş yapmalısınız.");
                         } else if (xhr.responseJSON && xhr.responseJSON.errors) {
-                            // ASP.NET Core ModelState hatalarını göster
                             var errorMessages = [];
                             for (var key in xhr.responseJSON.errors) {
                                 if (xhr.responseJSON.errors.hasOwnProperty(key)) {
@@ -597,17 +558,15 @@
                 });
             });
 
-            // Yorum silme butonu tıklama olayı
             $(document).on('click', '.delete-comment-btn', function() {
                 var commentId = $(this).data('comment-id');
-                var currentToken = localStorage.getItem("token"); // Use 'currentToken' as in add comment
+                var currentToken = localStorage.getItem("token"); 
 
                 if (!currentToken) {
                     notyf.error("Yorum silmek için giriş yapmalısınız.");
                     return;
                 }
 
-                // Confirm deletion (using simple confirm for now)
                 if (!confirm("Bu yorumu silmek istediğinizden emin misiniz?")) {
                     return;
                 }
@@ -616,17 +575,16 @@
                 $button.prop('disabled', true).text('Siliniyor...');
 
                 $.ajax({
-                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments/' + commentId,
+                    url: apiBaseUrl + '/courses/' + courseId + '/comments/' + commentId,
                     type: 'DELETE',
                     headers: {
                         "Authorization": "Bearer " + currentToken
                     },
                     success: function() {
                         notyf.success("Yorum başarıyla silindi.");
-                        fetchAndDisplayComments(courseId); // Yorum listesini yenile
+                        fetchAndDisplayComments(courseId); 
                     },
                     error: function(xhr, status, error) {
-                        console.error("Yorum silme hatası:", xhr.responseText);
                         if (xhr.status === 401) {
                             notyf.error("Bu işlemi yapmak için yetkiniz yok veya giriş yapmalısınız.");
                         } else if (xhr.status === 403) {
@@ -637,10 +595,8 @@
                         else {
                             notyf.error("Yorum silinirken bir hata oluştu.");
                         }
-                         // Butonu eski haline getir (başarısız olursa da)
                         $button.prop('disabled', false).text('Sil');
                     }
-                    // No 'complete' needed here as success handles refresh, error handles button re-enable
                 });
             });
         });

@@ -70,8 +70,6 @@
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // Notyf global olarak _layoutAdminLTE.cshtml'de başlatıldığı için burada tekrar tanımlanmıyor.
-
         $(document).ready(function () {
             const apiBaseUrl = "@ViewBag.ApiBaseUrl";
             const token = localStorage.getItem("token");
@@ -110,12 +108,12 @@
 
             function getCategories() {
                 $.ajax({
-                    url: apiBaseUrl + '/categories', // API yolu düzeltildi (baseurl zaten /api içeriyorsa)
+                    url: apiBaseUrl + '/categories', 
                     type: 'GET',
                     headers: { "Authorization": "Bearer " + token },
                     contentType: "application/json",
                     success: function (data) {
-                        console.log("Kategoriler API'den alındı:", data); // Debugging için eklendi
+                        console.log("Kategoriler API'den alındı:", data); 
                         const categorySelect = $("#categoryIds");
                         categorySelect.empty();
 
@@ -165,7 +163,7 @@
                     photoFormData.append('photoFile', photoFile);
 
                     $.ajax({
-                        url: '/Admin/UploadCoursePhoto', // C# metodu için belirtilen yol
+                        url: '/Admin/UploadCoursePhoto', 
                         type: 'POST',
                         data: photoFormData,
                         processData: false,
@@ -179,70 +177,65 @@
                         }
                     });
                 } else {
-                    createCourse(null); // No photo file, send null
+                    createCourse(null); 
                 }
 
                 function createCourse(photoFileName) {
-                    // Construct the courseData object as specified
                     const courseData = {
-                        title: title, // title is already defined in the outer scope
-                        description: description, // description is already defined in the outer scope
-                        content: content, // content is already defined in the outer scope
+                        title: title, 
+                        description: description, 
+                        content: content, 
                         photoUrl: photoFileName || null,
-                        categoryIds: categoryIds.map(id => parseInt(id, 10)) // categoryIds is already defined, convert to int array
+                        categoryIds: categoryIds.map(id => parseInt(id, 10)) 
                     };
 
                     $.ajax({
                         url: apiBaseUrl + '/courses', 
                         type: 'POST',
                         headers: {
-                            "Authorization": "Bearer " + token, // token is already defined
-                            "Content-Type": "application/json" // Set Content-Type to application/json
+                            "Authorization": "Bearer " + token, 
+                            "Content-Type": "application/json" 
                         },
-                        data: JSON.stringify(courseData), // Stringify the courseData object
-                        // processData: false, // Remove for JSON data
-                        // contentType: false, // Remove for JSON data
+                        data: JSON.stringify(courseData), 
                         success: function (response) {
                             notyf.success("Kurs başarıyla oluşturuldu!");
                             window.location.href = '/Admin/List';
                         },
                         error: function (xhr, status, error) {
                             var errorMessage = "Kurs oluşturulurken hata oluştu.";
-                            if (xhr.responseJSON) { // Check if responseJSON exists
+                            if (xhr.responseJSON) { 
                                 if (xhr.responseJSON.message) {
                                     errorMessage = xhr.responseJSON.message;
                                 }
                                 if (xhr.responseJSON.errors) {
                                     let errorsDisplayed = false;
                                     for (const field in xhr.responseJSON.errors) {
-                                        // Ensure field name matches for categoryIds if API returns it as "CategoryIds"
                                         let fieldId = field.toLowerCase();
                                         if (field.toLowerCase() === 'categoryids') fieldId = 'categoryIds'; 
                                         
                                         showFieldValidationError(fieldId, xhr.responseJSON.errors[field].join(', '));
                                         errorsDisplayed = true;
                                     }
-                                    if (errorsDisplayed) { // If specific field errors were shown
-                                       displayValidationErrors("Lütfen formdaki hataları düzeltin."); // More generic summary
-                                    } else if (!xhr.responseJSON.message) { // If no general message and no specific field errors
-                                       displayValidationErrors(errorMessage); // Show the generic error in summary
+                                    if (errorsDisplayed) { 
+                                       displayValidationErrors("Lütfen formdaki hataları düzeltin."); 
+                                    } else if (!xhr.responseJSON.message) { 
+                                       displayValidationErrors(errorMessage); 
                                     }
                                 } else if (xhr.responseJSON.message) {
-                                     displayValidationErrors(errorMessage); // Show general message if no specific errors
+                                     displayValidationErrors(errorMessage); 
                                 }
                             } else if (xhr.responseText) {
-                                // Attempt to parse as JSON if responseJSON is not pre-parsed
                                 try {
                                     const parsedError = JSON.parse(xhr.responseText);
                                     if (parsedError && parsedError.message) {
                                         errorMessage = parsedError.message;
                                     }
-                                } catch(e) { /* ignore parsing error, use raw responseText */ }
-                                displayValidationErrors(errorMessage); // Display the error message in the summary
+                                } catch(e) {  }
+                                displayValidationErrors(errorMessage); 
                             } else {
-                                displayValidationErrors(errorMessage); // Default error message
+                                displayValidationErrors(errorMessage); 
                             }
-                            notyf.error(errorMessage); // Also show a notyf error
+                            notyf.error(errorMessage); 
                             console.error("Kurs oluşturma hatası:", xhr.responseText);
                         }
                     });
