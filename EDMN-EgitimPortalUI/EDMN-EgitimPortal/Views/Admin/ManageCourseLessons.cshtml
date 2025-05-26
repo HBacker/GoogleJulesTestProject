@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Ders Yönetimi";
+    Layout = "_layoutAdminLTE";
+}
+
+<div class="content-header" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-8">
+                <h1 class="m-0" id="pageTitle">@ViewData["Title"]</h1>
+                <h2 id="courseTitlePlaceholder" class="text-muted" style="font-size: 1.2rem;">Kurs ID: @ViewBag.CourseId</h2>
+            </div>
+            <div class="col-sm-4 text-right">
+                 <a href="/Admin/ManageLessonsDashboard" class="btn btn-outline-secondary mb-2">
+                    <i class="fas fa-arrow-left mr-1"></i> Kurs Seçimine Geri Dön
+                </a>
+                <a href="/Admin/CreateLessonForCourse?courseId=@ViewBag.CourseId" class="btn btn-success">
+                    <i class="fas fa-plus mr-1"></i> Yeni Ders Ekle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" style="margin-left:270px">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Bu Kursa Ait Dersler</h3>
+            </div>
+            <div class="card-body">
+                <div id="lessonsTableContainer" class="table-responsive">
+                    <div class="alert alert-info" id="noLessonsMessage" style="display:none;">
+                        Bu kursa ait ders bulunmamaktadır.
+                    </div>
+                    <table class="table table-striped table-hover" id="lessonsTable" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;">Sıra No</th>
+                                <th>Başlık</th>
+                                <th style="width: 25%; text-align: right;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lessonsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                 <div id="loadingLessons" class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
+                    </div>
+                    <p class="mt-3">Dersler yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token");
+            var courseId = "@ViewBag.CourseId";
+
+            if (!token) {
+                if (typeof notyf !== 'undefined') {
+                    notyf.error("Giriş yapmanız gerekiyor.");
+                }
+                $('#loadingLessons').html('<div class="alert alert-warning">İçeriği görüntülemek için giriş yapmalısınız.</div>');
+                // Disable buttons if any that require auth
+                return;
+            }
+            if (!courseId) {
+                if (typeof notyf !== 'undefined') {
+                    notyf.error("Kurs ID'si bulunamadı.");
+                }
+                 window.location.href = "/Admin/ManageLessonsDashboard";
+                return;
+            }
+
+            function fetchCourseDetails() {
+                $.ajax({
+                    url: apiBaseUrl + '/courses/' + courseId,
+                    type: 'GET',
+                    headers: { "Authorization": "Bearer " + token },
+                    success: function(course) {
+                        if (course && course.title) {
+                            $('#courseTitlePlaceholder').text(`Kurs: ${course.title} (ID: ${courseId})`);
+                        } else {
+                             $('#courseTitlePlaceholder').text(`Kurs ID: ${courseId} (Başlık bulunamadı)`);
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#courseTitlePlaceholder').text(`Kurs ID: ${courseId} (Başlık yüklenemedi)`);
+                        if (typeof notyf !== 'undefined') {
+                            notyf.error("Kurs başlığı yüklenirken bir hata oluştu.");
+                        }
+                    }
+                });
+            }
+
+
+            function fetchLessons() {
+                $('#loadingLessons').show();
+                $('#lessonsTable').hide();
+                $('#noLessonsMessage').hide();
+
+                $.ajax({
+                    url: apiBaseUrl + '/lessons?courseId=' + courseId, 
+                    type: 'GET',
+                    headers: { 
+                        "Authorization": "Bearer " + token 
+                    },
+                    success: function (data) {
+                        $('#loadingLessons').hide();
+                        var lessonsTableBody = $('#lessonsTableBody');
+                        lessonsTableBody.empty();
+
+                        if (data && data.length > 0) {
+                            // Assuming API returns lessons sorted by orderNo
+                            $('#lessonsTable').show();
+                            $('#noLessonsMessage').hide();
+                            $.each(data, function (i, lesson) {
+                                var row = `<tr data-lesson-id="${lesson.id}">
+                                            <td>${lesson.orderNo}</td>
+                                            <td>${lesson.title}</td>
+                                            <td style="text-align: right;">
+                                                <a href="/Admin/EditSingleLesson?lessonId=${lesson.id}&courseId=${courseId}" class="btn btn-sm btn-primary" title="Düzenle">
+                                                    <i class="fas fa-edit"></i> Düzenle
+                                                </a>
+                                                <button class="btn btn-sm btn-danger delete-lesson-btn" data-id="${lesson.id}" title="Sil">
+                                                    <i class="fas fa-trash"></i> Sil
+                                                </button>
+                                            </td>
+                                        </tr>`;
+                                lessonsTableBody.append(row);
+                            });
+                        } else {
+                            $('#lessonsTable').hide();
+                            $('#noLessonsMessage').show();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $('#loadingLessons').hide();
+                        if (typeof notyf !== 'undefined') {
+                            notyf.error("Dersler yüklenirken bir sorun oluştu.");
+                        }
+                        $('#lessonsTableContainer').html('<div class="alert alert-danger">Dersler yüklenemedi. Lütfen daha sonra tekrar deneyin.</div>');
+                    }
+                });
+            }
+            
+            fetchCourseDetails();
+            fetchLessons();
+
+            $(document).on('click', '.delete-lesson-btn', function () {
+                var lessonId = $(this).data('id');
+                
+                Swal.fire({
+                    title: 'Emin misiniz?',
+                    text: "Bu dersi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Evet, Sil!',
+                    cancelButtonText: 'İptal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: apiBaseUrl + '/lessons/' + lessonId,
+                            type: 'DELETE',
+                            headers: { 
+                                "Authorization": "Bearer " + token 
+                            },
+                            success: function (response) {
+                                if (typeof notyf !== 'undefined') {
+                                    notyf.success("Ders başarıyla silindi.");
+                                }
+                                fetchLessons(); 
+                            },
+                            error: function (xhr, status, error) {
+                                var errorMessage = "Ders silinirken bir hata oluştu.";
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                } else if (xhr.status === 403) {
+                                    errorMessage = "Bu işlemi yapmak için yetkiniz bulunmamaktadır.";
+                                }
+                                if (typeof notyf !== 'undefined') {
+                                    notyf.error(errorMessage);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

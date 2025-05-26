@@ -101,7 +101,7 @@
         $(document).ready(function () {
             var apiBaseUrl = "@ViewBag.ApiBaseUrl";
             var token = localStorage.getItem("token");
-            var initialCourseId = "@ViewBag.CourseId"; // Passed from controller if filtering
+            var initialCourseId = "@ViewBag.CourseId"; 
 
             if (!token) {
                 notyf.error("Giriş yapmanız gerekiyor.");
@@ -154,7 +154,7 @@
             function fetchLessons(courseId = null) {
                 let url = apiBaseUrl + '/lessons';
                 if (courseId) {
-                    url += '?courseId=' + courseId; // Assuming API supports filtering by courseId
+                    url += '?courseId=' + courseId; 
                 }
 
                 $.ajax({
@@ -175,8 +175,8 @@
                                             </button>` :
                                     `<span class="text-muted">Video yok</span>`;
 
-                                var thumbnailImg = item.thumbnailUrl ?
-                                    `<img src="/thumbnails/${item.thumbnailUrl}" alt="Thumbnail" style="height: 30px; width: auto;" class="img-thumbnail" />` :
+                                var thumbnailImg = item.thumbnailUrl && item.thumbnailUrl !== '-' ?
+                                    `<img src="/uploads/lessons/thumbs/${item.thumbnailUrl}" alt="Thumbnail" style="height: 30px; width: auto;" class="img-thumbnail" />` :
                                     `<span class="text-muted">Thumbnail yok</span>`;
 
                                 var row = `

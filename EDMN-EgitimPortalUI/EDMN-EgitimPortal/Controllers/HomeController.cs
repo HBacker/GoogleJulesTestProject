@@ -26,6 +26,25 @@ namespace EgitimPortalFinal.Controllers
             return View();
         }
 
+        public IActionResult Course()
+        {
+            ViewBag.ApiBaseUrl = ApiBaseUrl;
+            return View("../Course/Course");
+        }
+
+        public IActionResult Details(int id) 
+        {
+            ViewBag.ApiBaseUrl = ApiBaseUrl;
+            ViewBag.CourseId = id; 
+            return View("../Course/Details");
+        }
+
+        public IActionResult Search() 
+        {
+            ViewBag.ApiBaseUrl = ApiBaseUrl;
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

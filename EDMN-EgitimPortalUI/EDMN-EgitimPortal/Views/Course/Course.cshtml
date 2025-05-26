@@ -28,255 +28,242 @@
     <div class="custom-tab" id="categoryTabs">
         <a href="#" class="tab-link active" data-tab="all">Tümü</a>
     </div>
+    <div class="mb-3 mt-3">
+        <label for="categorySearchableSelect" class="form-label">Kategoriye Göre Filtrele (Dropdown):</label>
+        <select id="categorySearchableSelect" class="form-control">
+            <option value="all">Tüm Kategoriler</option>
+        </select>
+    </div>
     <div class="custom-card-container" id="course-container">
         <div class="alert alert-info" id="noCoursesMessage" style="display:none;">
             Gösterilecek kurs bulunmamaktadır.
         </div>
     </div>
+    <div id="paginationControls" class="mt-4 d-flex justify-content-center"></div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var apiBaseUrl = "@ViewBag.ApiBaseUrl"; // Make sure your HomeController passes this to the layout
-            var token = localStorage.getItem("token"); // Token might be needed for some public APIs if secured
+            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
+            var token = localStorage.getItem("token");
+            var defaultImageUrl = '/img/default-course.jpg';
+            
+            var currentPage = 1;
+            var pageSize = 6; 
+            var currentCategoryId = 'all';
 
-            let currentCategoryFilter = 'all'; // Default filter
+            if (typeof notyf === 'undefined' && typeof Notyf !== 'undefined') {
+                 window.notyf = new Notyf({
+                    duration: 3000,
+                    position: { x: 'right', y: 'top' }
+                });
+            } else if (typeof notyf === 'undefined' && typeof Notyf === 'undefined') {
+                window.notyf = { 
+                    error: function(msg){ console.error("Notyf.error: " + msg); }, 
+                    success: function(msg){ console.log("Notyf.success: " + msg); },
+                    info: function(msg){ console.log("Notyf.info: " + msg); }
+                };
+            }
 
-            // --- Carousel Logic ---
             const slides = document.querySelectorAll('.main-carousel-slide');
             const prevButton = document.querySelector('.main-carousel-prev');
             const nextButton = document.querySelector('.main-carousel-next');
-            let currentSlide = 0;
+            let currentCarouselSlide = 0;
 
-            function showSlide(index) {
+            function showCarouselSlide(index) {
                 slides.forEach((slide, i) => {
                     slide.classList.remove('active');
-                    if (i === index) { // Corrected comparison
+                    if (i === index) {
                         slide.classList.add('active');
                     }
                 });
             }
 
-            prevButton.addEventListener('click', () => {
-                currentSlide = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1;
-                showSlide(currentSlide);
-            });
-
-            nextButton.addEventListener('click', () => {
-                currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
-                showSlide(currentSlide);
-            });
-
-            // Auto-advance carousel
-            setInterval(() => {
-                currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
-                showSlide(currentSlide);
-            }, 5000); // Change slide every 5 seconds
-
-            // --- API Integration for Courses and Categories ---
-
-            // Function to fetch and display courses
-            function fetchCourses(categoryId = null) {
-                let url = apiBaseUrl + '/courses';
-                // Your Swagger doesn't show a direct filter for /api/courses.
-                // For now, we'll fetch all and filter client-side if API doesn't support server-side filtering.
-                // If you implement server-side filtering (e.g., /api/courses?categoryId=X), adjust this URL.
-                // Example for server-side filtering: if (categoryId && categoryId !== 'all') { url += `?categoryId=${categoryId}`; }
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    headers: {
-                        // "Authorization": "Bearer " + token // Uncomment if public courses also require authentication
-                    },
-                    success: function (data) {
-                        var courseContainer = $('#course-container');
-                        courseContainer.empty();
-
-                        let filteredCourses = data;
-                        if (categoryId && categoryId !== 'all') {
-                            // Client-side filtering based on category ID
-                            filteredCourses = data.filter(course =>
-                                course.categories && course.categories.some(cat => cat.id == categoryId)
-                            );
-                        }
-
-                        if (filteredCourses && filteredCourses.length > 0) {
-                            $('#noCoursesMessage').hide();
-                            $.each(filteredCourses, function (i, course) {
-                                var photoUrl = course.photoUrl && course.photoUrl !== '-' ? `/CoursePhotos/${course.photoUrl}` : '/img/default-course.jpg'; // Default image if no photo
-                                var categoriesText = course.categories && course.categories.length > 0 ?
-                                    course.categories.map(c => c.name).join(', ') : 'Genel';
-
-                                var courseCard = `
-                                            <div class="custom-card">
-                                                <div class="custom-card-image">
-                                                    <img src="${photoUrl}" alt="${course.title}" />
-                                                </div>
-                                                <div class="custom-card-content">
-                                                    <span class="custom-card-category">${categoriesText}</span>
-                                                    <h4>${course.title}</h4>
-                                                    <p>${course.description.substring(0, 100)}...</p>
-                                                    <div class="custom-card-footer">
-                                                        <a href="/Course/Detail/${course.id}" class="btn btn-primary custom-readmore-btn">
-                                                            Daha Fazla <i class="fas fa-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        `;
-                                courseContainer.append(courseCard);
-                            });
-                        } else {
-                            $('#noCoursesMessage').show();
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Kurslar yüklenirken hata oluştu:", xhr.responseText);
-                        // notyf.error("Kurslar yüklenirken bir sorun oluştu."); // Uncomment if Notyf is available in public layout
-                        $('#course-container').empty().append($('#noCoursesMessage').show());
-                    }
+            if(slides.length > 0 && prevButton && nextButton) {
+                prevButton.addEventListener('click', () => {
+                    currentCarouselSlide = (currentCarouselSlide === 0) ? slides.length - 1 : currentCarouselSlide - 1;
+                    showCarouselSlide(currentCarouselSlide);
                 });
+
+                nextButton.addEventListener('click', () => {
+                    currentCarouselSlide = (currentCarouselSlide === slides.length - 1) ? 0 : currentCarouselSlide + 1;
+                    showCarouselSlide(currentCarouselSlide);
+                });
+
+                setInterval(() => {
+                    currentCarouselSlide = (currentCarouselSlide === slides.length - 1) ? 0 : currentCarouselSlide + 1;
+                    showCarouselSlide(currentCarouselSlide);
+                }, 5000); 
             }
 
-            // Function to fetch and display categories as tabs
-            function fetchCategories() {
-                $.ajax({
-                    url: apiBaseUrl + 'api/categories',
-                    type: 'GET',
-                    headers: {
-                        // "Authorization": "Bearer " + token // Uncomment if categories also require authentication
-                    },
-                    success: function (data) {
-                        var categoryTabs = $('#categoryTabs');
-                        // Keep 'Tümü' tab, remove existing dynamic tabs before adding new ones
-                        categoryTabs.find('.tab-link:not([data-tab="all"])').remove();
-                        $.each(data, function (i, category) {
-                            var tabLink = `
-                                        <a href="#" class="tab-link" data-tab="${category.id}">${category.name}</a>
-                                    `;
-                            categoryTabs.append(tabLink);
-                        });
-
-                        // Attach click handlers to category tabs (delegated for dynamically added elements)
-                        categoryTabs.off('click', '.tab-link').on('click', '.tab-link', function (e) {
-                            e.preventDefault();
-                            $('.tab-link').removeClass('active');
-                            $(this).addClass('active');
-                            currentCategoryFilter = $(this).data('tab');
-                            fetchCourses(currentCategoryFilter);
-                        });
-
-                        // Initial load of courses based on default filter ('all')
-                        fetchCourses(currentCategoryFilter);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Kategoriler yüklenirken hata oluştu:", xhr.responseText);
-                        // notyf.error("Kategoriler yüklenirken bir sorun oluştu."); // Uncomment if Notyf is available in public layout
-                    }
-                });
-            }
-
-            fetchCategories();
-    </script>
-    <script>
-        $(document).ready(function () {
-            var apiBaseUrl = "@ViewBag.ApiBaseUrl";
-
-            if (typeof notyf === 'undefined') {
-                window.notyf = new Notyf({
-                    duration: 3000,
-                    position: { x: 'right', y: 'top' }
-                });
-            }
-
-            var defaultImageUrl = '/CoursePhotos/thumbnails/defaultCourseCover.png';
-
-            function loadCourses(categoryId = null) {
-                var url = apiBaseUrl + '/courses';
-
-                console.log(`loadCourses: Fetching courses from ${url} with categoryId: ${categoryId}`);
-
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log('loadCourses: API Success response:', data);
-                        let filteredData = data;
-
-                        if (categoryId !== null && categoryId !== 'all') {
-                            filteredData = data.filter(course =>
-                                course.categories && course.categories.some(category => category.id == categoryId)
-                            );
-                            console.log(`loadCourses: Filtered by categoryId '${categoryId}':`, filteredData);
-                        } else {
-                            console.log(`loadCourses: Showing all courses (categoryId is '${categoryId}' or null).`);
-                        }
-
-                        displayCourses(filteredData);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("loadCourses: AJAX Error:", xhr, status, error);
-                        let errorMessage = "Kurslar yüklenirken bir hata oluştu.";
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.responseText) {
-                            errorMessage = xhr.responseText;
-                        }
-                        notyf.error(errorMessage);
-                        displayCourses([]);
-                    }
-                });
-            }
-
-            function displayCourses(courses) {
+            function displayCourses(coursesToDisplay) {
                 var courseContainer = $('#course-container');
                 courseContainer.empty();
+                $('#noCoursesMessage').hide();
 
-                if (courses.length === 0) {
+                if (!coursesToDisplay || coursesToDisplay.length === 0) {
                     $('#noCoursesMessage').show();
-                    console.log("displayCourses: No courses found, showing 'noCoursesMessage'.");
                     return;
-                } else {
-                    $('#noCoursesMessage').hide();
-                    console.log("displayCourses: Courses found, hiding 'noCoursesMessage'.");
                 }
 
-                $.each(courses, function (index, course) {
-                    var imageUrl = (course.photoUrl === '-' || !course.photoUrl) ? defaultImageUrl : '/CoursePhotos/' + course.photoUrl;
-
+                $.each(coursesToDisplay, function (i, course) {
+                    var imageUrl = (course.photoUrl === '-' || !course.photoUrl) ? defaultImageUrl : '/uploads/courses/' + course.photoUrl;
                     var categoriesText = course.categories && course.categories.length > 0 ?
                         course.categories.map(c => c.name).join(', ') : 'Genel';
-
                     var courseTitle = course.title || 'Başlık Yok';
                     var courseDescription = course.description ? course.description.substring(0, 100) + '...' : 'Açıklama Yok';
 
                     var courseCard = `
-                    <div class="course-card">
-                        <div class="course-card-img">
-                            <img src="${imageUrl}" alt="${courseTitle}" class="img-fluid">
-                        </div>
-                        <div class="course-card-body">
-                            <span class="course-card-category">${categoriesText}</span>
-                            <h4><a href="/Course/Detail/${course.id}" class="course-card-title">${courseTitle}</a></h4>
-                            <p class="course-card-description">${courseDescription}</p>
-                        </div>
-                       <hr class="course-card-divider">
-                        <div class="course-card-footer">
-                            <a href="/Course/Detail/${course.id}" class="btn-incele">İncele</a>
-                        </div>
-                    </div>
-                `;
+                        <div class="custom-card">
+                            <div class="custom-card-image">
+                                <img src="${imageUrl}" alt="${courseTitle}" />
+                            </div>
+                            <div class="custom-card-content">
+                                <span class="custom-card-category">${categoriesText}</span>
+                                <h4>${courseTitle}</h4>
+                                <p>${courseDescription}</p>
+                                <div class="custom-card-footer">
+                                    <a href="/Course/Details/${course.id}" class="btn btn-primary custom-readmore-btn">
+                                        Daha Fazla <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>`;
                     courseContainer.append(courseCard);
                 });
-                console.log("displayCourses: All course cards rendered.");
             }
 
-            loadCourses();
+            function updatePaginationControls(totalItems, pageNumber) {
+                var paginationControls = $('#paginationControls');
+                paginationControls.empty();
+                var totalPages = Math.ceil(totalItems / pageSize);
 
+                if (totalPages <= 1) return;
+
+                var prevDisabled = pageNumber === 1 ? "disabled" : "";
+                var nextDisabled = pageNumber === totalPages ? "disabled" : "";
+
+                paginationControls.append(`<button class="btn btn-outline-secondary page-nav-btn" data-page="${pageNumber - 1}" ${prevDisabled}>Önceki</button>`);
+
+                let startPage = Math.max(1, pageNumber - 2);
+                let endPage = Math.min(totalPages, pageNumber + 2);
+
+                if (pageNumber <= 3) {
+                    endPage = Math.min(5, totalPages);
+                }
+                if (pageNumber > totalPages - 3) {
+                    startPage = Math.max(1, totalPages - 4);
+                }
+
+
+                if (startPage > 1) {
+                    paginationControls.append(`<button class="btn btn-outline-secondary page-btn" data-page="1">1</button>`);
+                    if (startPage > 2) {
+                        paginationControls.append(`<span class="page-link">...</span>`);
+                    }
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    var activeClass = i === pageNumber ? "active btn-primary" : "btn-outline-secondary";
+                    paginationControls.append(`<button class="btn ${activeClass} page-btn" data-page="${i}">${i}</button>`);
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationControls.append(`<span class="page-link">...</span>`);
+                    }
+                    paginationControls.append(`<button class="btn btn-outline-secondary page-btn" data-page="${totalPages}">${totalPages}</button>`);
+                }
+                
+                paginationControls.append(`<button class="btn btn-outline-secondary page-nav-btn" data-page="${pageNumber + 1}" ${nextDisabled}>Sonraki</button>`);
+
+                $('.page-btn, .page-nav-btn').on('click', function() {
+                    var targetPage = $(this).data('page');
+                    if (targetPage > 0 && targetPage <= totalPages) {
+                         loadCourses(currentCategoryId, targetPage);
+                    }
+                });
+            }
+            
+            function loadCourses(categoryId, pageNumber) {
+                currentCategoryId = categoryId;
+                currentPage = pageNumber;
+                
+                let url = apiBaseUrl + '/courses?pageNumber=' + currentPage + '&pageSize=' + pageSize;
+                if (currentCategoryId && currentCategoryId !== 'all') {
+                    url += '&categoryId=' + currentCategoryId;
+                }
+                
+                $('#course-container').empty().html('<div class="text-center p-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Yükleniyor...</span></div></div>');
+                $('#paginationControls').empty();
+
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    headers: {}, 
+                    success: function (response) {
+                        if (response && response.items) {
+                            displayCourses(response.items);
+                            updatePaginationControls(response.totalCount, currentPage);
+                        } else {
+                            displayCourses([]);
+                            updatePaginationControls(0,1);
+                            notyf.error("Kurs formatı hatalı.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        notyf.error("Kurslar yüklenirken bir sorun oluştu.");
+                        displayCourses([]);
+                        updatePaginationControls(0,1);
+                    }
+                });
+            }
+
+            function loadCategoriesAndFilters() {
+                $.ajax({
+                    url: apiBaseUrl + '/categories',
+                    type: 'GET',
+                    headers: {},
+                    success: function (categories) {
+                        var categoryTabs = $('#categoryTabs');
+                        var categorySelect = $('#categorySearchableSelect');
+                        
+                        categoryTabs.find('.tab-link:not([data-tab="all"])').remove();
+                        categorySelect.find('option:not([value="all"])').remove();
+
+                        $.each(categories, function (i, category) {
+                            var tabLink = `<a href="#" class="tab-link" data-tab="${category.id}">${category.name}</a>`;
+                            categoryTabs.append(tabLink);
+                            categorySelect.append($('<option>', { value: category.id, text: category.name }));
+                        });
+
+                        categoryTabs.off('click', '.tab-link').on('click', '.tab-link', function (e) {
+                            e.preventDefault();
+                            var selectedCategoryId = $(this).data('tab');
+                            $('.tab-link').removeClass('active');
+                            $(this).addClass('active');
+                            $('#categorySearchableSelect').val(selectedCategoryId); 
+                            loadCourses(selectedCategoryId, 1);
+                        });
+                        
+                        categorySelect.off('change').on('change', function() {
+                            var selectedCategoryId = $(this).val();
+                            $('.tab-link').removeClass('active');
+                            $(`.tab-link[data-tab="${selectedCategoryId}"]`).addClass('active');
+                            loadCourses(selectedCategoryId, 1);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        notyf.error("Kategoriler yüklenirken bir sorun oluştu.");
+                    }
+                });
+                
+                loadCourses(currentCategoryId, currentPage);
+            }
+            
+            loadCategoriesAndFilters();
         });
-
     </script>
 }

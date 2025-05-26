@@ -187,6 +187,21 @@ public class AdminController : Controller
         return View();
     }
 
+    public IActionResult ManageLessonsDashboard()
+    {
+        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        _notify.Information("Ders yönetimi ana sayfası yüklendi.");
+        return View();
+    }
+
+    public IActionResult ManageCourseLessons(int courseId)
+    {
+        ViewBag.ApiBaseUrl = ApiBaseUrl;
+        ViewBag.CourseId = courseId;
+        _notify.Information($"'{courseId}' ID'li kursun dersleri yönetiliyor.");
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> UploadLessonVideo(IFormFile videoFile)
     {
