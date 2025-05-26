@@ -170,4 +170,76 @@ public class AdminController : Controller
             return StatusCode(500, "Fotoğraf yüklenirken hata oluştu.");
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadLessonVideo(IFormFile videoFile)
+    {
+        if (videoFile == null || videoFile.Length == 0)
+        {
+            _notify.Error("Video yüklenemedi. Lütfen geçerli bir dosya seçin.");
+            return BadRequest(new { message = "Video dosyası yüklenemedi." });
+        }
+
+        try
+        {
+            // For unique filenames, consider:
+            // var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(videoFile.FileName);
+            var fileName = Path.GetFileName(videoFile.FileName); // Using original filename for consistency for now
+            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "lessons", "videos");
+
+            if (!Directory.Exists(uploadsPath))
+                Directory.CreateDirectory(uploadsPath);
+
+            var fullPath = Path.Combine(uploadsPath, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await videoFile.CopyToAsync(stream);
+            }
+
+            _notify.Success("Video başarıyla yüklendi: " + fileName);
+            return Ok(new { fileName = fileName });
+        }
+        catch (Exception ex)
+        {
+            _notify.Error($"Video yüklenirken hata oluştu: {ex.Message}");
+            return StatusCode(500, new { message = $"Video yüklenirken sunucu hatası oluştu: {ex.Message}" });
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadLessonThumbnail(IFormFile thumbnailFile)
+    {
+        if (thumbnailFile == null || thumbnailFile.Length == 0)
+        {
+            _notify.Error("Thumbnail yüklenemedi. Lütfen geçerli bir dosya seçin.");
+            return BadRequest(new { message = "Thumbnail dosyası yüklenemedi." });
+        }
+
+        try
+        {
+            // For unique filenames, consider:
+            // var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(thumbnailFile.FileName);
+            var fileName = Path.GetFileName(thumbnailFile.FileName); // Using original filename for consistency for now
+            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "lessons", "thumbnails");
+
+            if (!Directory.Exists(uploadsPath))
+                Directory.CreateDirectory(uploadsPath);
+
+            var fullPath = Path.Combine(uploadsPath, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await thumbnailFile.CopyToAsync(stream);
+            }
+
+            _notify.Success("Thumbnail başarıyla yüklendi: " + fileName);
+            return Ok(new { fileName = fileName });
+        }
+        catch (Exception ex)
+        {
+            _notify.Error($"Thumbnail yüklenirken hata oluştu: {ex.Message}");
+            return StatusCode(500, new { message = $"Thumbnail yüklenirken sunucu hatası oluştu: {ex.Message}" });
+        }
+    }
 }

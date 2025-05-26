@@ -231,6 +231,15 @@
                 });
             }
 
+            function parseJwt(token) {
+                try {
+                    return JSON.parse(atob(token.split('.')[1]));
+                } catch (e) {
+                    console.error("Error parsing JWT: ", e); // Log error for debugging
+                    return null;
+                }
+            }
+
             // Kurs detaylarını ve dersleri yükle
             function loadCourseDetails() {
                 // Yükleniyor mesajını göster
@@ -273,6 +282,20 @@
                                             ${courseData.content ? courseData.content.split('\r\n\r\n').map(p => `<p style="font-size:larger; font-weight:400">${p}</p>`).join('') : ''}
                                         </div>
                                     </div>
+
+                                    <div class="comments-section mt-4">
+                                        <h3>Yorumlar</h3>
+                                        <div id="commentsList" class="mb-3">
+                                            <!-- Comments will be loaded here -->
+                                        </div>
+                                        <h4>Yorum Ekle</h4>
+                                        <form id="addCommentForm">
+                                            <div class="mb-3">
+                                                <textarea id="newCommentText" class="form-control" rows="3" placeholder="Yorumunuzu yazın..." required></textarea>
+                                            </div>
+                                            <button type="submit" id="submitCommentBtn" class="btn btn-primary">Yorum Yap</button>
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div class="course-sidebar">
@@ -288,6 +311,8 @@
 
                         // Dersleri çek ve listele
                         fetchLessons(courseId);
+                        // Yorumları çek ve listele
+                        fetchAndDisplayComments(courseId);
                     },
                     error: function (xhr, status, error) {
                         var errorMessage = "Kurs detayları yüklenirken bir hata oluştu.";
@@ -301,6 +326,65 @@
                         notyf.error(errorMessage);
                         $('#courseContentArea').html(`<div class="alert alert-danger">${errorMessage}</div><a href="/" class="btn btn-primary mt-3">Anasayfaya Dön</a>`);
                         console.error("Kurs detayı yükleme hatası:", xhr.responseText);
+                    }
+                });
+            }
+
+            // Yorumları çek ve göster
+            function fetchAndDisplayComments(courseId) {
+                var commentsList = $('#commentsList');
+                commentsList.html('<p class="text-center">Yorumlar yükleniyor...</p>'); 
+
+                // Token ve kullanıcı bilgilerini al
+                var localToken = localStorage.getItem("token"); // Renamed to avoid conflict with global 'token'
+                var decodedToken = localToken ? parseJwt(localToken) : null;
+                var currentUserId = decodedToken ? decodedToken.nameid : null;
+                // Handle roles being a single string or an array
+                var currentUserRoles = [];
+                if (decodedToken && decodedToken.role) {
+                    currentUserRoles = Array.isArray(decodedToken.role) ? decodedToken.role : [decodedToken.role];
+                }
+
+                $.ajax({
+                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments',
+                    type: 'GET',
+                    success: function (comments) {
+                        commentsList.empty(); 
+                        if (comments && comments.length > 0) {
+                            comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Newest first
+
+                            $.each(comments, function (index, comment) {
+                                var commentCard = $('<div>').addClass('comment-item card mb-2');
+                                var cardBody = $('<div>').addClass('card-body');
+                                var commentTextP = $('<p>').addClass('card-text').text(comment.text);
+                                var authorAndDate = $('<small>').addClass('text-muted');
+                                var userNameSpan = $('<span>').text(comment.userName).html();
+                                authorAndDate.html('Yazan: ' + userNameSpan + ' - ' + new Date(comment.createdAt).toLocaleString());
+
+                                var deleteButton = $('<button>')
+                                    .addClass('btn btn-sm btn-danger delete-comment-btn float-end')
+                                    .attr('data-comment-id', comment.id)
+                                    .text('Sil')
+                                    .hide(); // Initially hidden
+
+                                // Conditionally show delete button
+                                if (currentUserId && (comment.userId === currentUserId || currentUserRoles.includes('Admin'))) {
+                                    deleteButton.show();
+                                }
+
+                                cardBody.append(deleteButton); // Add button first so it can float right
+                                cardBody.append(commentTextP);
+                                cardBody.append(authorAndDate);
+                                commentCard.append(cardBody);
+                                commentsList.append(commentCard);
+                            });
+                        } else {
+                            commentsList.html('<p class="text-center text-muted">Bu kurs için henüz yorum yapılmamış.</p>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Yorumları yükleme hatası:", error);
+                        commentsList.html('<p class="text-center text-danger">Yorumlar yüklenirken bir hata oluştu.</p>');
                     }
                 });
             }
@@ -454,6 +538,111 @@
 
             // Sayfa yüklendiğinde kurs detaylarını yükle
             loadCourseDetails();
+
+            // Yorum ekleme formu gönderimi
+            $(document).on('submit', '#addCommentForm', function(event) {
+                event.preventDefault();
+
+                var commentText = $('#newCommentText').val().trim();
+                if (!commentText) {
+                    notyf.error("Lütfen yorum metnini girin.");
+                    return;
+                }
+
+                // Token'ı localStorage'dan al (zaten global 'token' değişkeninde var ama en güncel halini almak iyi olabilir)
+                var currentToken = localStorage.getItem("token"); 
+                if (!currentToken) {
+                    notyf.error("Yorum yapmak için giriş yapmalısınız.");
+                    // İsteğe bağlı: Giriş sayfasına yönlendirme
+                    // window.location.href = "/Home/Login"; 
+                    return;
+                }
+
+                $('#submitCommentBtn').prop('disabled', true).text('Gönderiliyor...');
+
+                $.ajax({
+                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments',
+                    type: 'POST',
+                    headers: {
+                        "Authorization": "Bearer " + currentToken,
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({ text: commentText }),
+                    success: function(response) {
+                        $('#newCommentText').val(''); // Textarea'yı temizle
+                        notyf.success("Yorum başarıyla eklendi.");
+                        fetchAndDisplayComments(courseId); // Yorum listesini yenile
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Yorum ekleme hatası:", xhr.responseText);
+                        if (xhr.status === 401) {
+                            notyf.error("Yorum yapmak için giriş yapmalısınız.");
+                        } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            // ASP.NET Core ModelState hatalarını göster
+                            var errorMessages = [];
+                            for (var key in xhr.responseJSON.errors) {
+                                if (xhr.responseJSON.errors.hasOwnProperty(key)) {
+                                    errorMessages.push(xhr.responseJSON.errors[key].join(' '));
+                                }
+                            }
+                            notyf.error("Yorum kaydedilemedi: " + errorMessages.join(' '));
+                        }
+                        else {
+                            notyf.error("Yorum eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+                        }
+                    },
+                    complete: function() {
+                        $('#submitCommentBtn').prop('disabled', false).text('Yorum Yap');
+                    }
+                });
+            });
+
+            // Yorum silme butonu tıklama olayı
+            $(document).on('click', '.delete-comment-btn', function() {
+                var commentId = $(this).data('comment-id');
+                var currentToken = localStorage.getItem("token"); // Use 'currentToken' as in add comment
+
+                if (!currentToken) {
+                    notyf.error("Yorum silmek için giriş yapmalısınız.");
+                    return;
+                }
+
+                // Confirm deletion (using simple confirm for now)
+                if (!confirm("Bu yorumu silmek istediğinizden emin misiniz?")) {
+                    return;
+                }
+                
+                var $button = $(this);
+                $button.prop('disabled', true).text('Siliniyor...');
+
+                $.ajax({
+                    url: apiBaseUrl + 'api/courses/' + courseId + '/comments/' + commentId,
+                    type: 'DELETE',
+                    headers: {
+                        "Authorization": "Bearer " + currentToken
+                    },
+                    success: function() {
+                        notyf.success("Yorum başarıyla silindi.");
+                        fetchAndDisplayComments(courseId); // Yorum listesini yenile
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Yorum silme hatası:", xhr.responseText);
+                        if (xhr.status === 401) {
+                            notyf.error("Bu işlemi yapmak için yetkiniz yok veya giriş yapmalısınız.");
+                        } else if (xhr.status === 403) {
+                             notyf.error("Bu yorumu silme yetkiniz bulunmamaktadır.");
+                        } else if (xhr.status === 404) {
+                            notyf.error("Yorum bulunamadı veya zaten silinmiş.");
+                        }
+                        else {
+                            notyf.error("Yorum silinirken bir hata oluştu.");
+                        }
+                         // Butonu eski haline getir (başarısız olursa da)
+                        $button.prop('disabled', false).text('Sil');
+                    }
+                    // No 'complete' needed here as success handles refresh, error handles button re-enable
+                });
+            });
         });
     </script>
 }

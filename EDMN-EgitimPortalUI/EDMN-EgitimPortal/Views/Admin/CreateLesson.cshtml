@@ -236,6 +236,63 @@
             });
         }
 
+        function uploadLessonFile(file, uploadUrl) {
+            var deferred = $.Deferred();
+            if (!file) {
+                // If no file, resolve immediately with null, indicating no upload was attempted or needed.
+                deferred.resolve(null);
+                return deferred.promise();
+            }
+
+            var formData = new FormData();
+            // The controller expects the parameter name to be 'videoFile' or 'thumbnailFile'
+            if (uploadUrl.includes('UploadLessonVideo')) {
+                formData.append('videoFile', file);
+            } else if (uploadUrl.includes('UploadLessonThumbnail')) {
+                formData.append('thumbnailFile', file);
+            } else {
+                // Should not happen if called correctly
+                console.error("Unknown upload URL for file: " + uploadUrl);
+                deferred.reject({ message: "Bilinmeyen dosya yükleme türü." });
+                return deferred.promise();
+            }
+            
+
+            $.ajax({
+                url: uploadUrl, // This will be /Admin/UploadLessonVideo or /Admin/UploadLessonThumbnail
+                type: 'POST',
+                headers: {
+                    // "Authorization": "Bearer " + token // Not needed for MVC controller actions if using cookies/anti-forgery
+                },
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Assuming response is { fileName: "actual_filename.ext" }
+                    if (response && response.fileName) {
+                        deferred.resolve(response); 
+                    } else {
+                        // If filename is not in response, treat as error
+                        deferred.reject({ message: "Dosya adı sunucudan alınamadı." });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = "Dosya yüklenirken bir hata oluştu.";
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        try {
+                            var parsedError = JSON.parse(xhr.responseText);
+                            if(parsedError && parsedError.message) errorMessage = parsedError.message;
+                        } catch(e) { /* use raw responseText */ }
+                    }
+                    console.error("Dosya yükleme hatası (" + uploadUrl + "):", errorMessage, xhr.responseText);
+                    deferred.reject({ message: errorMessage, details: xhr.responseText });
+                }
+            });
+            return deferred.promise();
+        }
+
         function saveAllLessons() {
             const courseId = $('#courseSelect').val();
             if (!courseId) {
@@ -243,103 +300,133 @@
                 notyf.error('Lütfen dersleri kaydetmeden önce bir kurs seçin.');
                 return;
             }
+            clearFieldValidationError($('#courseSelect'));
 
-            clearFieldValidationError($('#courseSelect')); // Clear course select validation
+            const $saveAllLessonsBtn = $('#saveAllLessonsBtn');
+            $saveAllLessonsBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Kaydediliyor...');
 
-            const lessonsToCreate = [];
-            let allLessonsValid = true;
+            let lessonPromises = [];
+            let allFormsValid = true;
 
             $('#lessonFormsContainer .lesson-card').each(function (index) {
-                const lessonTitleInput = $(this).find('.lesson-title');
-                const videoFileInput = $(this).find('.lesson-video-file');
-                const thumbnailFileInput = $(this).find('.lesson-thumbnail-file');
-                const orderNoInput = $(this).find('.lesson-order-no');
+                const $lessonCard = $(this);
+                const lessonTitleInput = $lessonCard.find('.lesson-title');
+                const videoFileInput = $lessonCard.find('.lesson-video-file');
+                const thumbnailFileInput = $lessonCard.find('.lesson-thumbnail-file');
+                const orderNoInput = $lessonCard.find('.lesson-order-no');
 
                 const lessonTitle = lessonTitleInput.val().trim();
-                const videoFile = videoFileInput[0].files[0];
-                const thumbnailFile = thumbnailFileInput[0].files[0];
+                const videoFile = videoFileInput[0].files[0]; // File object or undefined
+                const thumbnailFile = thumbnailFileInput[0].files[0]; // File object or undefined
                 const orderNo = parseInt(orderNoInput.val());
 
                 clearFieldValidationError(lessonTitleInput);
                 clearFieldValidationError(videoFileInput);
                 clearFieldValidationError(thumbnailFileInput);
 
+                let currentLessonValid = true;
                 if (!lessonTitle) {
                     displayFieldValidationError(lessonTitleInput, 'Ders adı boş bırakılamaz.');
-                    allLessonsValid = false;
+                    currentLessonValid = false;
                 }
-                if (videoFile && videoFile.size > 2 * 1024 * 1024 * 1024) { // 2GB limit
+                if (videoFile && videoFile.size > 2 * 1024 * 1024 * 1024) { // 2GB
                     displayFieldValidationError(videoFileInput, 'Video dosyası çok büyük (max: 2GB).');
-                    allLessonsValid = false;
+                    currentLessonValid = false;
                 }
-                if (thumbnailFile && thumbnailFile.size > 5 * 1024 * 1024) { // 5MB limit
+                if (thumbnailFile && thumbnailFile.size > 5 * 1024 * 1024) { // 5MB
                     displayFieldValidationError(thumbnailFileInput, 'Thumbnail dosyası çok büyük (max: 5MB).');
-                    allLessonsValid = false;
+                    currentLessonValid = false;
                 }
 
-                if (allLessonsValid) { // Only push if this specific lesson is valid
-                    lessonsToCreate.push({
-                        title: lessonTitle,
-                        videoFile: videoFile,
-                        thumbnailFile: thumbnailFile,
-                        orderNo: orderNo,
-                        courseId: parseInt(courseId)
+                if (!currentLessonValid) {
+                    allFormsValid = false;
+                    // Skip adding promise for this lesson, or add a rejected promise
+                    // For simplicity, we'll rely on allFormsValid flag checked later.
+                    return; // Continues to next .each iteration
+                }
+
+                // Create a deferred object for the entire lesson processing chain
+                var lessonProcessingDeferred = $.Deferred();
+                lessonPromises.push(lessonProcessingDeferred.promise());
+
+                var videoUploadPromise = uploadLessonFile(videoFile, '/Admin/UploadLessonVideo');
+                var thumbnailUploadPromise = uploadLessonFile(thumbnailFile, '/Admin/UploadLessonThumbnail');
+
+                $.when(videoUploadPromise, thumbnailUploadPromise)
+                    .done(function (videoUploadResponse, thumbnailUploadResponse) {
+                        // videoUploadResponse and thumbnailUploadResponse are arrays: [data, statusText, jqXHR]
+                        // or null if no file was provided and uploadLessonFile resolved with null
+                        const videoFileName = videoUploadResponse && videoUploadResponse[0] ? videoUploadResponse[0].fileName : null;
+                        const thumbnailFileName = thumbnailUploadResponse && thumbnailUploadResponse[0] ? thumbnailUploadResponse[0].fileName : null;
+
+                        const lessonPayload = {
+                            courseId: parseInt(courseId),
+                            title: lessonTitle,
+                            orderNo: orderNo,
+                            videoUrl: videoFileName, // API expects just the filename
+                            thumbnailUrl: thumbnailFileName // API expects just the filename
+                        };
+
+                        $.ajax({
+                            url: apiBaseUrl + '/lessons',
+                            type: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + token,
+                                "Content-Type": "application/json"
+                            },
+                            data: JSON.stringify(lessonPayload),
+                            success: function (response) {
+                                console.log(`Ders "${lessonTitle}" başarıyla API'ye gönderildi.`);
+                                lessonProcessingDeferred.resolve(response); // Resolve the main promise for this lesson
+                            },
+                            error: function (xhr, status, error) {
+                                var errorMsg = `Ders "${lessonTitle}" API'ye gönderilirken hata: `;
+                                if (xhr.responseJSON && xhr.responseJSON.message) errorMsg += xhr.responseJSON.message;
+                                else errorMsg += xhr.statusText;
+                                console.error(errorMsg, xhr.responseText);
+                                notyf.error(errorMsg); // Notify for specific lesson failure
+                                lessonProcessingDeferred.reject({lessonTitle: lessonTitle, error: xhr.responseText});
+                            }
+                        });
+                    })
+                    .fail(function (uploadError) {
+                        // This .fail is for $.when if either uploadLessonFile promise is rejected.
+                        var errorMsg = `Ders "${lessonTitle}" için dosya yükleme hatası: `;
+                        if(uploadError && uploadError.message) errorMsg += uploadError.message;
+                        else errorMsg += "Bilinmeyen dosya yükleme hatası.";
+                        console.error(errorMsg, uploadError);
+                        notyf.error(errorMsg);
+                        lessonProcessingDeferred.reject({lessonTitle: lessonTitle, error: uploadError});
                     });
-                }
-            });
+            }); // End of .each lesson-card
 
-            if (!allLessonsValid) {
-                notyf.error("Lütfen tüm ders formlarındaki hataları düzeltin.");
+            if (!allFormsValid) {
+                notyf.error("Lütfen tüm ders formlarındaki işaretli hataları düzeltin.");
+                $saveAllLessonsBtn.prop('disabled', false).html('<i class="fas fa-save me-2"></i> Tüm Dersleri Kaydet');
                 return;
             }
 
-            if (lessonsToCreate.length === 0) {
-                notyf.error('Lütfen en az bir ders ekleyin.');
+            if (lessonPromises.length === 0 && allFormsValid) { // No lessons added, but no validation errors on empty form
+                notyf.info('Kaydedilecek ders bulunmamaktadır.');
+                $saveAllLessonsBtn.prop('disabled', false).html('<i class="fas fa-save me-2"></i> Tüm Dersleri Kaydet');
                 return;
             }
-
-            // Send each lesson as a separate AJAX request
-            let requests = [];
-            $.each(lessonsToCreate, function (i, lesson) {
-                var formData = new FormData();
-                formData.append('courseId', lesson.courseId);
-                formData.append('title', lesson.title);
-                formData.append('orderNo', lesson.orderNo);
-
-                if (lesson.videoFile) {
-                    formData.append('videoFile', lesson.videoFile); // Assuming API takes videoFile
-                }
-                if (lesson.thumbnailFile) {
-                    formData.append('thumbnailFile', lesson.thumbnailFile); // Assuming API takes thumbnailFile
-                }
-
-                requests.push($.ajax({
-                    url: apiBaseUrl + '/lessons', // Your API's POST //lessons endpoint
-                    type: 'POST',
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false
-                }));
-            });
-
-            // Use $.when.apply to wait for all AJAX requests to complete
-            $.when.apply($, requests)
+            
+            $.when.apply($, lessonPromises)
                 .done(function () {
-                    notyf.success("Tüm dersler başarıyla eklendi!");
-                    window.location.href = '/Admin/LessonList?courseId=' + courseId;
+                    notyf.success("Tüm dersler başarıyla oluşturuldu!");
+                     setTimeout(function() { // Give time for notyf to show
+                        window.location.href = '/Admin/LessonList?courseId=' + courseId;
+                    }, 1500);
                 })
-                .fail(function (xhr, status, error) {
-                    var errorMessage = "Dersler eklenirken bir hata oluştu.";
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
-                    } else if (xhr.responseText) {
-                        errorMessage = xhr.responseText;
-                    }
-                    notyf.error(errorMessage);
-                    console.error("Ders ekleme hatası:", xhr.responseText);
+                .fail(function (failedLessonError) {
+                    // This fail callback might receive arguments from the first rejected promise.
+                    // More specific error handling for which lesson failed was done via notyf inside the loop.
+                    notyf.error("Bazı dersler oluşturulurken hatalar oluştu. Lütfen detayları kontrol edin.");
+                    console.error("Bir veya daha fazla ders işlenirken hata:", failedLessonError);
+                })
+                .always(function () {
+                    $saveAllLessonsBtn.prop('disabled', false).html('<i class="fas fa-save me-2"></i> Tüm Dersleri Kaydet');
                 });
         }
     </script>
